@@ -1,15 +1,15 @@
 
+import Login from "./components/login"
+
 function App() {
  
 
   return (
 
     <>
-
+    <Login />
+    
    
-   <p>
-    hello
-   </p>
     </>
   )
 }
