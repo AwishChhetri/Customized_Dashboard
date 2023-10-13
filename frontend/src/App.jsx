@@ -1,6 +1,6 @@
 
 import Login from "./components/login"
-
+import SignUp from "./components/SignUp"
 function App() {
  
 
@@ -8,7 +8,7 @@ function App() {
 
     <>
     <Login />
-    
+    {/* <SignUp /> */}
    
     </>
   )
