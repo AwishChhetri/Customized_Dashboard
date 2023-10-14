@@ -1,17 +1,20 @@
 
-import Login from "./components/login"
-import SignUp from "./components/SignUp"
+import { Routes, Route } from 'react-router-dom';
+import  Home  from './components/Home.jsx';
+import SignUp from './components/SignUp.jsx';
+import Login  from './components/login.jsx';
+import Dash from './components/Dash.jsx';
 function App() {
- 
-
   return (
-
-    <>
-    <Login />
-    {/* <SignUp /> */}
-   
-    </>
-  )
+    <div className="App">
+       <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/dash" element={<Dash />} />
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
