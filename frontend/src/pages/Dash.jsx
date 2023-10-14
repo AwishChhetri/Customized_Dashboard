@@ -1,7 +1,7 @@
 import '../css/dash.css'
 import { useState } from 'react'
-import Form from './form'
-import Profile from './Profile'
+import Form from '../components/form'
+import Profile from '../components/Profile'
 
 const Dash = () => {
 
@@ -31,7 +31,7 @@ const Dash = () => {
 
 
   return (
-    <div className="bg-green-400">
+    <div className="bg-green-200">
       {val1 && <Profile box1={box1} box2={box2} box3={box3} show_form={Show_form}/>}
       {val2 && <Form change={Change} hide_form={Hide_form}/>}
       {console.log(val1)}
