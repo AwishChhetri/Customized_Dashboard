@@ -1,5 +1,12 @@
+import Navbar from '../components/navbar'
+
 const Login = () => {
   return (
+    <div>
+
+    <div className="bg-[#610C9F]">
+      <Navbar/>
+    </div>
     <div className="  bg-gradient-to-t from-white via-purple-100 to-indigo-200 flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8  ">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         {/* logo */}
@@ -18,7 +25,7 @@ const Login = () => {
           />
         </svg>
         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-          LogIn to your account
+          Log In 
         </h2>
       </div>
 
@@ -27,8 +34,7 @@ const Login = () => {
           <div>
             <label
               htmlFor="email"
-              className="block text-sm font-medium leading-6 text-gray-900"
-            >
+              className="block text-sm font-medium leading-6 text-gray-900">
               Email address
             </label>
             <div className="mt-2">
@@ -75,7 +81,7 @@ const Login = () => {
           <div>
             <button
               type="submit"
-              className="flex w-full justify-center rounded-md bg-violet-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              className="flex w-full justify-center rounded-md bg-[#940B92] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Sign in
             </button>
@@ -93,6 +99,8 @@ const Login = () => {
         </p>
       </div>
     </div>
+  </div>
+
   );
 };
 

@@ -1,6 +1,11 @@
+import Navbar from '../components/navbar'
+
 const SignUp = () => {
   return (
     <div>
+      <div className="bg-[#610C9F]">
+      <Navbar/>
+    </div>
       <div className=" bg-gradient-to-t from-white via-purple-100 to-indigo-200 flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
           {/* logo */}
@@ -86,7 +91,7 @@ const SignUp = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-md bg-violet-500 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                className="flex w-full justify-center rounded-md bg-[#940B92] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Register
               </button>
