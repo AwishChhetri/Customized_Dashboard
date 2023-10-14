@@ -1,11 +1,9 @@
 
 import { Routes, Route } from 'react-router-dom';
-import  Home  from './components/Home.jsx';
+import  Home  from './pages/Home.jsx';
 import SignUp from './components/SignUp.jsx';
 import Login  from './components/login.jsx';
 import Dash from './components/Dash.jsx';
-import Form from './components/form.jsx';
-
 function App() {
   return (
     <div className="App">
