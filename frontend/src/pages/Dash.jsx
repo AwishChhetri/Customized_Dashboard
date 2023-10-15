@@ -2,6 +2,7 @@ import '../css/dash.css'
 import { useState } from 'react'
 import Form from '../components/form'
 import Profile from '../components/Profile'
+import 'tailwindcss/tailwind.css'
 
 const Dash = () => {
 
@@ -12,11 +13,13 @@ const Dash = () => {
   const [val1,setVal1] = useState(true)
   const [val2,setVal2] = useState(false)
 
-  const Change = (color1,color2,color3)=>{
+
+  const Change = async(color1,color2,color3)=>{
     console.log(color1,color2,color3)
     setBox1(`p-6 bg-${color1}-700 m-6`)
     setBox2(`p-6 bg-${color2}-700 m-6`)
     setBox3(`p-6 bg-${color3}-700 m-6`)
+    console.log(color1,color2,color3)
   }
 
   const Show_form = ()=>{
@@ -24,7 +27,7 @@ const Dash = () => {
     setVal2(true)
   }
 
-  const Hide_form = ()=>{
+  const Hide_form = async()=>{
     setVal1(true)
     setVal2(false)
   }
