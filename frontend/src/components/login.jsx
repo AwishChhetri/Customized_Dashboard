@@ -1,12 +1,10 @@
-import Navbar from '../components/navbar'
+
 
 const Login = () => {
   return (
     <div>
 
-    <div className="bg-[#610C9F]">
-      <Navbar/>
-    </div>
+    
     <div className="  bg-gradient-to-t from-white via-purple-100 to-indigo-200 flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8  ">
       <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         {/* logo */}

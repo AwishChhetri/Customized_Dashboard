@@ -1,11 +1,9 @@
-import Navbar from "../components/navbar.jsx"
+
 import {Link } from 'react-router-dom'
  const Home = () => {
   return (
     <>
-    <div className="bg-[#610C9F]">
-      <Navbar/>
-    </div>
+    
     <div className=" bg-gradient-to-t from-white via-purple-100 to-indigo-200">
     <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
           
