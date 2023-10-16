@@ -1,6 +1,31 @@
-
+import { useState } from "react";
+import axios from 'axios';
 
 const SignUp = () => {
+
+  const [username,setUsername] = useState('')
+  const [email,setEmail] = useState('')
+  const [password,setPassword] = useState('')
+
+
+  const Register = ()=>{
+    axios.post(
+      'http://localhost:5000/register',
+      {
+        username : username,
+        email : email,
+        password : password
+      })
+      .then((res)=>{
+        console.log(res.status)
+        console.log(res.data.msg)
+      })
+      .catch((err)=>{
+        console.log("Error in Signup -> ",err)
+      })
+  }
+
+
   return (
     <div>
       
@@ -28,8 +53,7 @@ const SignUp = () => {
         </div>
 
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" action="#" method="POST">
-            <div>
+            <div className="space-y-6">
               <label
                 htmlFor="FullName"
                 className="block text-sm font-medium leading-6 text-gray-900"
@@ -38,6 +62,8 @@ const SignUp = () => {
               </label>
               <div className="mt-2">
                 <input
+                  value={username}
+                  onChange={(e)=>setUsername(e.target.value)}
                   id="FullName"
                   name="FullName"
                   type="text"
@@ -55,6 +81,8 @@ const SignUp = () => {
               </label>
               <div className="mt-2">
                 <input
+                  value={email}
+                  onChange={(e)=>setEmail(e.target.value)}
                   id="email"
                   name="email"
                   type="email"
@@ -76,6 +104,8 @@ const SignUp = () => {
               </div>
               <div className="mt-2">
                 <input
+                  value={password}
+                  onChange={(e)=>setPassword(e.target.value)}
                   id="password"
                   name="password"
                   type="password"
@@ -88,13 +118,12 @@ const SignUp = () => {
 
             <div>
               <button
-                type="submit"
+                onClick={Register}
                 className="flex w-full justify-center rounded-md bg-[#940B92] px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-violet-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
                 Register
               </button>
             </div>
-          </form>
         </div>
       </div>
     </div>
