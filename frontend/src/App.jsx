@@ -1,8 +1,8 @@
 
 import { Routes, Route } from 'react-router-dom';
 import  Home  from './pages/Home.jsx';
-import SignUp from './components/SignUp.jsx';
-import Login  from './components/login.jsx';
+import SignUp from './pages/SignUp.jsx';
+import Login  from './pages/login.jsx';
 import About from './components/about.jsx';
 import Dashboard from '../src/pages/Dash.jsx';
 

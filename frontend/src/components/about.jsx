@@ -2,7 +2,7 @@ import Logo from "../assets/logo.png";
 import SideBar from "./SideBar";
 const About = () => {
   return (
-    <div>
+    <div className="bg-gradient-to-t from-white via-purple-100 to-indigo-200">
       <SideBar/>
       <div className="p-4 sm:ml-64 font-one">
         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
