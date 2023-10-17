@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const SignUp = () => {
@@ -6,7 +7,7 @@ const SignUp = () => {
   const [username,setUsername] = useState('')
   const [email,setEmail] = useState('')
   const [password,setPassword] = useState('')
-
+  const navigate=useNavigate();
 
   const Register = ()=>{
     axios.post(
@@ -19,6 +20,7 @@ const SignUp = () => {
       .then((res)=>{
         console.log(res.status)
         console.log(res.data.msg)
+        navigate('/login')
       })
       .catch((err)=>{
         console.log("Error in Signup -> ",err)
