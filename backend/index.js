@@ -5,7 +5,6 @@ const mongoose=require('mongoose')
 const app = express()
 const port = 5000
 
-//Middleware
 app.use(express.json())
 app.use(cors())
 
@@ -29,7 +28,10 @@ const userSchema=mongoose.Schema({
     password:{
         type:String
     },
-    
+    btn:{
+        type:String
+    }
+
 
 },
 
@@ -61,27 +63,46 @@ app.post('/register', (req, res) => {
 
 
 app.post("/login",async(req,res)=>{
-    console.log(req.body)
+    console.log("This is the login:",req.body)
     const result=await User.findOne({email:req.body.email});
    console.log(result)
     if(!result)
      {
-      res.json({msg:"Not registered"})}
+      res.status(404).json({msg:"Not registered"})}
     else { 
         if(result.password==req.body.password){
-            res.json(result)
+            res.status(200).json(result)
         }
         else{
-            res.json({msg:"Wrong Password"})
+            res.status(404).json({msg:"Wrong Password"})
         }
-       
+
     } })
   
 app.get('/hello',(req,res)=>{
     res.send("HELLO, Try Route '/register'")
 })
 
+app.post('/changes',async(req,res)=>{
+   
+    
+    const update=await User.updateOne(
+            { _id: req.body._id },
+            { $set: { btn: ans } }
+        )
+        .then(() => {
+            console.log(`updated`,upadate);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
 
+    update(req.body)
+
+
+       
+        
+})
 
 
 
