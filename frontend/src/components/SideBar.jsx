@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 
 const SideBar = () => {
+
   return (
     <div>
       <button
@@ -35,7 +36,6 @@ const SideBar = () => {
           <ul className="space-y-2 font-medium">
             <li>
               <Link
-                to='/dash'
                 href="#"
                 className="flex items-center p-2 text-gray-500 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >

@@ -1,14 +1,12 @@
-import Radiobutton from "./Radiobutton";
-import SideBar from "./SideBar";
-import DropDown from "./dropdown";
-import { useUser } from '../pages/demoAccount.jsx';
-import Footer from '../components/footer.jsx';
+import Radiobutton from "./Radiobutton"
+import SideBar from "./SideBar"
+import DropDown from "./dropdown"
+import Footer from '../components/footer.jsx'
 import Header from '../components/header.jsx'
 import { useParams } from "react-router-dom"
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"
 import axios from "axios";
 const HeroPage = () => {
-  const { user } = useUser()
   const { id } = useParams()
 
   const [mail,setMail] = useState('')
