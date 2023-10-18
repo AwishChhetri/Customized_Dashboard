@@ -71,7 +71,7 @@ app.post("/login",async(req,res)=>{
       res.status(404).json({msg:"Not registered"})}
     else { 
         if(result.password==req.body.password){
-            res.status(200).json(result)
+            res.status(200).json({id:result._id})
         }
         else{
             res.status(404).json({msg:"Wrong Password"})
@@ -91,7 +91,7 @@ app.post('/changes',async(req,res)=>{
             { $set: { btn: ans } }
         )
         .then(() => {
-            console.log(`updated`,upadate);
+            console.log(`updated`,update);
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -103,6 +103,13 @@ app.post('/changes',async(req,res)=>{
        
         
 })
+
+app.get('/user/:id',async(req,res)=>{
+    const userId = req.params.id
+    const result=await User.findOne({_id:userId});
+    res.json({name: result.username,mail: result.email})
+})
+
 
 
 

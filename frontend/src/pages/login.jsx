@@ -10,6 +10,8 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [temp,setTemp] = useState('none')
+
   const handleLogin = () => {
     axios
       .post("http://localhost:5000/login", {
@@ -18,11 +20,10 @@ const Login = () => {
       })
       .then((res) => {
         console.log(res.status);
-        console.log(res.data);
         if (res.status === 200) {
           const userData = res.data;
           login(userData);
-          navigate("../dash");
+          navigate(`/dash/${res.data.id}`);
         } else {
           window.location.reload();
         }
