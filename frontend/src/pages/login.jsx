@@ -1,29 +1,36 @@
-import { useState } from "react";
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useUser } from "./demoAccount";
 
-import axios from 'axios';
 const Login = () => {
-  const navigate=useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const navigate = useNavigate(); 
+  const { login } = useUser();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = () => {
-    axios.post(
-      'http://localhost:5000/login',
-      {
+    axios
+      .post("http://localhost:5000/login", {
         email: email,
-        password: password
+        password: password,
       })
       .then((res) => {
         console.log(res.status);
         console.log(res.data);
-        navigate('/dash')
-       
+        if (res.status === 200) {
+          const userData = res.data;
+          login(userData);
+          navigate("../dash");
+        } else {
+          window.location.reload();
+        }
       })
       .catch((err) => {
         console.log("Error in Login -> ", err);
       });
-  }
+  };
 
   return (
     <div className="bg-gradient-to-t from-white via-purple-100 to-indigo-200 flex min-h-screen flex-1 flex-col justify-center px-6 py-12 lg:px-8">

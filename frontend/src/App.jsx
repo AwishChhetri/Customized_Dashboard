@@ -5,8 +5,7 @@ import SignUp from './pages/SignUp.jsx';
 import Login  from './pages/login.jsx';
 import About from './components/about.jsx';
 import Dashboard from '../src/pages/Dash.jsx';
-
-
+import ContactForm from './pages/prefer.jsx'
 function App() {
   return (
     <div className="App">
@@ -16,6 +15,7 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
         <Route path="/about" element={<About />} />
         <Route path="/dash" element={<Dashboard />} />
+        <Route path="/prefer" element={<ContactForm />} />
       </Routes>
     </div>
   );
