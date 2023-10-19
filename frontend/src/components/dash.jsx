@@ -13,7 +13,6 @@ const HeroPage = () => {
   const [name,setName] = useState('')
 
   useEffect(()=>{
-    console.log("Working")
     axios.get(`http://localhost:5000/user/${id}`)
     .then((res)=>{
       setMail(res.data.mail)
@@ -27,7 +26,6 @@ const HeroPage = () => {
 
   return (
     <div  className="bg-gradient-to-t from-white via-purple-100 to-indigo-200">
-      <SideBar/>
       <div className="p-4 sm:ml-64 font-one bg-gradient-to-t from-white via-purple-100 to-indigo-200">
         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
           <Header name={name}/>

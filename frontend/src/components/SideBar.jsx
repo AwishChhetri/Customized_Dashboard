@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-const SideBar = () => {
+const SideBar = (props) => {
 
   return (
     <div>
@@ -36,6 +36,7 @@ const SideBar = () => {
           <ul className="space-y-2 font-medium">
             <li>
               <Link
+                onClick={()=>props.showDash()}
                 href="#"
                 className="flex items-center p-2 text-gray-500 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
@@ -54,7 +55,7 @@ const SideBar = () => {
             </li>
             <li>
               <Link
-                to='/about'
+                onClick={()=>props.showAbout()}
                 href="#"
                 className="flex items-center p-2 text-gray-500 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >

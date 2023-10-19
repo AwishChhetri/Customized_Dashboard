@@ -3,7 +3,6 @@ import SideBar from "./SideBar";
 const About = () => {
   return (
     <div className="bg-gradient-to-t from-white via-purple-100 to-indigo-200">
-      <SideBar/>
       <div className="p-4 sm:ml-64 font-one">
         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
           <div className="flex  flex-col items-center justify-center h-screen mb-4 rounded bg-gray-50 dark:bg-gray-800 p-6">
