@@ -1,26 +1,37 @@
 import Radiobutton from "./Radiobutton"
-import SideBar from "./SideBar"
 import DropDown from "./dropdown"
 import Footer from '../components/footer.jsx'
 import Header from '../components/header.jsx'
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios";
-const HeroPage = () => {
-  const { id } = useParams()
+import LoadColors from '../components/colors'
 
+const HeroPage = () => {
+
+  LoadColors()
+
+  const { id } = useParams()
   const [mail,setMail] = useState('')
   const [name,setName] = useState('')
+
+  const [button,setButton] = useState('block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-purple-500 transition hover:bg-indigo-700 focus:outline-none focus:ring')
 
   useEffect(()=>{
     axios.get(`http://localhost:5000/user/${id}`)
     .then((res)=>{
       setMail(res.data.mail)
       setName(res.data.name)
+      changeButton(res.data.text,res.data.background)
     })
     .catch((err)=>{
       console.log(err)
     })
+
+    const changeButton = (textcolor,backcolor)=>{
+      setButton(`block rounded-lg bg-${backcolor}-600 px-5 py-3 text-sm font-medium text-${textcolor}-500 transition hover:bg-indigo-700 focus:outline-none focus:ring`)
+    }
+
   },[])
 
 
@@ -49,7 +60,11 @@ const HeroPage = () => {
               </p>
             </div>
           </div>
-          
+          <div className='flex flex-col items-center justify-center'>
+            <button className={button}>
+              TEST
+            </button>
+          </div>
         </div>
 
         <Footer/>

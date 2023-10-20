@@ -80,7 +80,7 @@ app.post("/login",async(req,res)=>{
     } })
   
 app.get('/hello',(req,res)=>{
-    res.send("HELLO, Try Route '/register'")
+    res.send("HELLO")
 })
 
 app.post('/changes',async(req,res)=>{
@@ -105,11 +105,22 @@ app.post('/changes',async(req,res)=>{
 })
 
 app.get('/user/:id',async(req,res)=>{
+    const textcolor = 'yellow'
+    const backcolor = 'pink'
     const userId = req.params.id
     const result=await User.findOne({_id:userId});
-    res.json({name: result.username,mail: result.email})
+    res.json({name: result.username,mail: result.email, text: textcolor, background: backcolor})
+    console.log(result)
 })
 
+
+app.post('/colors',async(req,res)=>{
+    text_color = req.body.textColor
+    background_color = req.body.backgroundColor
+    console.log("Text color : ",text_color)
+    console.log("Background color : ",background_color)
+    res.json({msg:'Colors Saved'})
+})
 
 
 
