@@ -22,7 +22,7 @@ const HeroPage = () => {
     .then((res)=>{
       setMail(res.data.mail)
       setName(res.data.name)
-      changeButton(res.data.text,res.data.background)
+      changeButton(res.data.textColor,res.data.backgroundColor)
     })
     .catch((err)=>{
       console.log(err)

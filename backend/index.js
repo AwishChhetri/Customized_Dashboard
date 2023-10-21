@@ -109,11 +109,9 @@ app.post('/colors', async (req, res) => {
 
 
 app.get('/user/:id',async(req,res)=>{
-    const textcolor = 'yellow'
-    const backcolor = 'pink'
     const userId = req.params.id
     const result=await User.findOne({_id:userId});
-    res.json({name: result.username,mail: result.email, text: textcolor, background: backcolor})
+    res.json(result)
     console.log(result)
 });
 
