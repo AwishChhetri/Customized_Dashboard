@@ -117,6 +117,8 @@ app.get('/user/:id',async(req,res)=>{
 app.post('/colors',async(req,res)=>{
     text_color = req.body.textColor
     background_color = req.body.backgroundColor
+    user_id = req.body.userId
+    console.log("User ID : ",user_id)
     console.log("Text color : ",text_color)
     console.log("Background color : ",background_color)
     res.json({msg:'Colors Saved'})

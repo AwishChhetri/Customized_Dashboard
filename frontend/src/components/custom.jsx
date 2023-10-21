@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import SideBar from './SideBar';
+import { useParams } from "react-router-dom"
 import Header from './header.jsx';
 import axios from "axios";
 
 const Preference = () => {
+
+  const { id } = useParams()
 
   const [text,setText] = useState('')
   const [back,setBack] = useState('')
@@ -11,7 +13,8 @@ const Preference = () => {
   const showcolors = ()=>{
     axios.post('http://localhost:5000/colors',{
       textColor : text,
-      backgroundColor: back
+      backgroundColor: back,
+      userId: id
     })
     .then((res)=>{
       console.log(res.data.msg)
@@ -23,7 +26,6 @@ const Preference = () => {
 
   return (
       <div className='p-4 sm:ml-64 font-one bg-gradient-to-t from-white via-purple-100 to-indigo-200'>
-        <SideBar/>
         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
           <Header/>
           <div className="grid grid-cols-2 gap-4 mb-4 ">
