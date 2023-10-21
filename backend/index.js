@@ -28,9 +28,16 @@ const userSchema=mongoose.Schema({
     password:{
         type:String
     },
-    btn:{
-        type:String
+   
+    backgroundColor:{
+        type:String,
+        default: "Blue"
+    },
+    textColor:{
+        type:String,
+        default: "Black"
     }
+
 
 
 },
@@ -83,26 +90,23 @@ app.get('/hello',(req,res)=>{
     res.send("HELLO")
 })
 
-app.post('/changes',async(req,res)=>{
-   
+app.post('/colors', async (req, res) => {
     
-    const update=await User.updateOne(
-            { _id: req.body._id },
-            { $set: { btn: ans } }
-        )
-        .then(() => {
-            console.log(`updated`,update);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-
-    update(req.body)
-
-
-       
+    try {
+        console.log(req.body);
+        const update = await User.updateMany(
+            { _id: req.body.userId },
+            { $set: { backgroundColor: req.body.backgroundColor, textColor: req.body.textColor } }
+        );
         
-})
+        console.log('updated');
+        res.status(200).json({ msg: 'Update successful' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ msg: 'Internal server error' });
+    }
+});
+
 
 app.get('/user/:id',async(req,res)=>{
     const textcolor = 'yellow'
@@ -111,18 +115,9 @@ app.get('/user/:id',async(req,res)=>{
     const result=await User.findOne({_id:userId});
     res.json({name: result.username,mail: result.email, text: textcolor, background: backcolor})
     console.log(result)
-})
+});
 
 
-app.post('/colors',async(req,res)=>{
-    text_color = req.body.textColor
-    background_color = req.body.backgroundColor
-    user_id = req.body.userId
-    console.log("User ID : ",user_id)
-    console.log("Text color : ",text_color)
-    console.log("Background color : ",background_color)
-    res.json({msg:'Colors Saved'})
-})
 
 
 
