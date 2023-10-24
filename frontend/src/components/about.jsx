@@ -1,28 +1,23 @@
-import Logo from "../assets/logo.png";
-import SideBar from "./SideBar";
+// import Logo from "../assets/logo.png";
+// import SideBar from "./SideBar";
 const About = () => {
   return (
-    <div className="bg-gradient-to-t from-white via-purple-100 to-indigo-200">
-      <div className="p-4 sm:ml-64 font-one">
-        <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
-          <div className="flex  flex-col items-center justify-center h-screen mb-4 rounded bg-gray-50 dark:bg-gray-800 p-6">
-            <img src={Logo} alt="image" className="h-64" />
-            <p className="text-2xl text-black font-two text-lg sm:text-xs ">
-              "Embrace the Stoic virtues of wisdom, courage, and resilience as
-              guiding beacons in the modern world. Remember, in a sea of change
-              and chaos, your inner character remains steadfast and under your
-              control. Let reason be your rudder, integrity your sail, and
-              justice your compass. Find serenity in the face of turmoil and
-              strength amidst challenges. As Pratap, I encourage you to navigate
-              life's uncertainties with a Stoic mindset, fostering a global
-              community rooted in wisdom, empathy, and unwavering moral
-              principles. Together, we can transcend adversity and emerge as
-              beacons of resilience and virtue in an ever-changing world."
+    <>
+    <div
+    className="py-8 px-8 max-w-sm mx-auto bg-white rounded-xl shadow-lg space-y-2 sm:py-4 sm:flex sm:items-center sm:space-y-0 sm:space-x-6">
+    <div className="text-center space-y-2 sm:text-left">
+        <div className="space-y-0.5">
+            <p className="text-lg text-black font-semibold">
+                Erin Lindford
             </p>
-          </div>
+            <p className="text-slate-500 font-medium">
+                Product Engineer
+            </p>
         </div>
-      </div>
+        <button className="px-4 py-1 text-sm text-purple-600 font-semibold rounded-full border border-purple-200 hover:text-white hover:bg-purple-600 hover:border-transparent focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2">Message</button>
     </div>
+</div>
+</>
   );
 };
 
