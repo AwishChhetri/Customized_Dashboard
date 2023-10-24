@@ -9,11 +9,33 @@ const Preference = (props) => {
 
   const [text,setText] = useState('')
   const [back,setBack] = useState('')
+  const [headbg,setHeadbg] = useState('')
+  const [footbg,setFootbg] = useState('')
+  // const [theme,setTheme] = useState('')
+  const [radio,setRadio] = useState('')
+  const [drop,setDrop] = useState('')
+  // const [label,setLabel] = useState('')
+
+  // console.log(
+  //   'text - ',text,
+  //   '\nback - ',back,
+  //   '\nhead - ',headbg,
+  //   '\nfoot - ',footbg,
+  //   '\ntheme - ',theme,
+  //   '\nradio - ',radio,
+  //   '\ndrop - ',drop,
+  //   '\nlabel - ',label,
+  // )
    
   const showcolors = ()=>{
+
     axios.post('http://localhost:5000/colors',{
       textColor : text,
-      backgroundColor: back,
+      buttonbackgroundColor: back,
+      headerBackgroundColor: headbg,
+      footerBackgroundColor: footbg,
+      radioButtonColor: radio,
+      dropDownButtonColor: drop,
       userId: id
     })
     .then((res)=>{
@@ -75,51 +97,51 @@ const Preference = (props) => {
             <div className="flex flex-col items-center justify-center rounded  h-28 ">
               Choose color for Header :
               <p className="">
-              <input type="radio" name='background' />PINK<br/>
-              <input type="radio" name='background' />YELLOW<br/>
-              <input type="radio" name='background' />ORANGE
+              <input type="radio" name='header' onClick={()=>setHeadbg('pink')}/>PINK<br/>
+              <input type="radio" name='header' onClick={()=>setHeadbg('yellow')}/>YELLOW<br/>
+              <input type="radio" name='header' onClick={()=>setHeadbg('orange')}/>ORANGE
               </p>
             </div>
             <div className="flex flex-col items-center justify-center rounded  h-28 ">
               Choose color for Footer :
               <p className="">
-              <input type="radio" name='background' onClick={()=>setBack('pink')}/>PINK<br/>
-              <input type="radio" name='background' onClick={()=>setBack('yellow')}/>YELLOW<br/>
-              <input type="radio" name='background' onClick={()=>setBack('orange')}/>ORANGE
+              <input type="radio" name='footer' onClick={()=>setFootbg('pink')}/>PINK<br/>
+              <input type="radio" name='footer' onClick={()=>setFootbg('yellow')}/>YELLOW<br/>
+              <input type="radio" name='footer' onClick={()=>setFootbg('orange')}/>ORANGE
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center rounded  h-28 ">
+            {/* <div className="flex flex-col items-center justify-center rounded  h-28 ">
               Choose color for Full page :
               <p className="">
-              <input type="radio" name='background' onClick={()=>setBack('pink')}/>PINK<br/>
-              <input type="radio" name='background' onClick={()=>setBack('yellow')}/>YELLOW<br/>
-              <input type="radio" name='background' onClick={()=>setBack('orange')}/>ORANGE
+              <input type="radio" name='theme' onClick={()=>setTheme('pink')}/>PINK<br/>
+              <input type="radio" name='theme' onClick={()=>setTheme('yellow')}/>YELLOW<br/>
+              <input type="radio" name='theme' onClick={()=>setTheme('orange')}/>ORANGE
               </p>
-            </div>
+            </div> */}
             <div className="flex flex-col items-center justify-center rounded  h-28 ">
               Choose color for Radio Button :
               <p className="">
-              <input type="radio" name='background' onClick={()=>setBack('pink')}/>PINK<br/>
-              <input type="radio" name='background' onClick={()=>setBack('yellow')}/>YELLOW<br/>
-              <input type="radio" name='background' onClick={()=>setBack('orange')}/>ORANGE
+              <input type="radio" name='radio' onClick={()=>setRadio('pink')}/>PINK<br/>
+              <input type="radio" name='radio' onClick={()=>setRadio('yellow')}/>YELLOW<br/>
+              <input type="radio" name='radio' onClick={()=>setRadio('orange')}/>ORANGE
               </p>
             </div>
             <div className="flex flex-col items-center justify-center rounded  h-28 ">
               Choose color for Dropdownbutton:
               <p className="">
-              <input type="radio" name='background' onClick={()=>setBack('pink')}/>PINK<br/>
-              <input type="radio" name='background' onClick={()=>setBack('yellow')}/>YELLOW<br/>
-              <input type="radio" name='background' onClick={()=>setBack('orange')}/>ORANGE
+              <input type="radio" name='drop' onClick={()=>setDrop('pink')}/>PINK<br/>
+              <input type="radio" name='drop' onClick={()=>setDrop('yellow')}/>YELLOW<br/>
+              <input type="radio" name='drop' onClick={()=>setDrop('orange')}/>ORANGE
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center rounded  h-28 ">
+            {/* <div className="flex flex-col items-center justify-center rounded  h-28 ">
               Choose color for Labels :
               <p className="">
-              <input type="radio" name='background' onClick={()=>setBack('pink')}/>PINK<br/>
-              <input type="radio" name='background' onClick={()=>setBack('yellow')}/>YELLOW<br/>
-              <input type="radio" name='background' onClick={()=>setBack('orange')}/>ORANGE
+              <input type="radio" name='label' onClick={()=>setLabel('pink')}/>PINK<br/>
+              <input type="radio" name='label' onClick={()=>setLabel('yellow')}/>YELLOW<br/>
+              <input type="radio" name='label' onClick={()=>setLabel('orange')}/>ORANGE
               </p>
-            </div>
+            </div> */}
           </div>
           <div className='flex flex-col items-center justify-center'>
             <button className='block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring' onClick={()=>showcolors()}>

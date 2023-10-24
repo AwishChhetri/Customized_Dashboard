@@ -17,20 +17,24 @@ const HeroPage = () => {
   const [name,setName] = useState('')
 
   const [button,setButton] = useState('block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-purple-500 transition hover:bg-indigo-700 focus:outline-none focus:ring')
+  const [header,setHeader] = useState('p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700')
+  const [footer,setFooter] = useState('bg-gray-200')
 
   useEffect(()=>{
     axios.get(`http://localhost:5000/user/${id}`)
     .then((res)=>{
       setMail(res.data.email)
       setName(res.data.username)
-      changeButton(res.data.textColor,res.data.backgroundColor)
+      changeButton(res.data.textColor,res.data.buttonBackgroundColor,res.data.headerBackgroundColor,res.data.footerBackgroundColor)
     })
     .catch((err)=>{fb
       console.log(err)
     })
 
-    const changeButton = (textcolor,backcolor)=>{
+    const changeButton = (textcolor,backcolor,header,footer)=>{
       setButton(`block rounded-lg bg-${backcolor}-600 px-5 py-3 text-sm font-medium text-${textcolor}-500 transition hover:bg-indigo-700 focus:outline-none focus:ring`)
+      setHeader(`p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 bg-${header}-200`)
+      setFooter(`bg-${footer}-200`)
     }
 
   },[])
@@ -39,7 +43,7 @@ const HeroPage = () => {
   return (
     <div  className="bg-gradient-to-t from-white via-purple-100 to-indigo-200">
       <div className="p-4 sm:ml-64 font-one bg-gradient-to-t from-white via-purple-100 to-indigo-200">
-        <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">
+        <div className={header}>
           <Header name={name}/>
          
           <div className='flex flex-col items-center justify-center'>
@@ -69,7 +73,7 @@ const HeroPage = () => {
               </p>
             </div>
           </div>
-        <Footer/>
+        <Footer foot={footer}/>
       </div>
     </div>
   );

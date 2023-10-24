@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Footer = () => {
+const Footer = (props) => {
   return (
     <>
         {/*
@@ -9,7 +9,7 @@ const Footer = () => {
   Plugins:
     - @tailwindcss/forms
 */}
-<footer class="bg-gray-100">
+<footer class={props.foot}>
   <div class="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
     <div class="flex justify-center text-teal-600">
       <svg

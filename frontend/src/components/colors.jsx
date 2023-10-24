@@ -8,7 +8,7 @@ const colors = ()=>{
         color6: 'bg-green-600',
         color7: 'text-red-500',
         color8: 'bg-red-600',
-        color8: 'bg-orange-600',
+        colorOrange: 'bg-orange-600 bg-orange-200 bg-orange-100 bg-orange-400 bg-orange-300',
     }
 }
 
