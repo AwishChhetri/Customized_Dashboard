@@ -108,9 +108,8 @@ app.get('/hello',(req,res)=>{
 })
 
 app.post('/colors', async (req, res) => {
-    
+    console.log(req.body.backgroundColor,req.body.textColor)
     try {
-        console.log(req.body);
         const update = await User.updateMany(
             { _id: req.body.userId },
             { $set: { backgroundColor: req.body.backgroundColor, textColor: req.body.textColor } }
