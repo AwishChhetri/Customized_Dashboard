@@ -20,8 +20,8 @@ const HeroPage = () => {
   useEffect(()=>{
     axios.get(`http://localhost:5000/user/${id}`)
     .then((res)=>{
-      setMail(res.data.mail)
-      setName(res.data.name)
+      setMail(res.data.email)
+      setName(res.data.username)
       changeButton(res.data.textColor,res.data.backgroundColor)
     })
     .catch((err)=>{

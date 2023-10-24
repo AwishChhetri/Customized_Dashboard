@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import Header from './header.jsx';
 import axios from "axios";
 
-const Preference = () => {
+const Preference = (props) => {
 
   const { id } = useParams()
 
@@ -18,6 +18,7 @@ const Preference = () => {
     })
     .then((res)=>{
       console.log(res.data.msg)
+      props.showDash()
     })
     .catch((err)=>{
       console.log("error in saving colors -> ",err)

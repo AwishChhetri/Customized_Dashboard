@@ -34,7 +34,7 @@ function Dash() {
         <SideBar showAbout={showAbout} showDash={showDash} showCustom={showCustom}/>
         {dash && <Dashboard/>}
         {about && <About/>}
-        {custom && <Custom/>}
+        {custom && <Custom showDash={showDash}/>}
     </div>
   )
 }
