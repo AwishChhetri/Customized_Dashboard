@@ -29,13 +29,30 @@ const userSchema=mongoose.Schema({
         type:String
     },
    
-    backgroundColor:{
+    buttonBackgroundColor:{
         type:String,
         default: "Blue"
     },
     textColor:{
         type:String,
         default: "Black"
+    },
+    headerBackgroundColor:{
+        type:String,
+        default:"white"
+    },
+    footerBackgroundColor:{
+        type:String,
+        default:"white"
+    },
+    radioButtonColor:
+    {
+        type:String,
+        default:"white"
+    },
+    dropDownButtonColor:{
+        type:String,
+        default:"white"
     }
 
 
