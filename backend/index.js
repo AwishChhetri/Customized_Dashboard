@@ -108,11 +108,16 @@ app.get('/hello',(req,res)=>{
 })
 
 app.post('/colors', async (req, res) => {
-    console.log(req.body.backgroundColor,req.body.textColor)
+    console.log(req.body)
     try {
         const update = await User.updateMany(
             { _id: req.body.userId },
-            { $set: { backgroundColor: req.body.backgroundColor, textColor: req.body.textColor } }
+            { $set: { buttonBackgroundColor: req.body.backgroundColor, textColor: req.body.textColor, 
+                headerBackgroundColor:req.body.headerBackgroundColor,
+                footerBackgroundColor:req.body.footerBackgroundColor,
+                radioButtonColor:req.body.radioButtonColor,
+                dropDownButtonColor:req.body.dropDownButtonColor,
+            } }
         );
         
         console.log('updated');
