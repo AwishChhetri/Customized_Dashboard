@@ -53,9 +53,19 @@ const userSchema=mongoose.Schema({
     dropDownButtonColor:{
         type:String,
         default:"white"
+    },
+    themeColor1:{
+        type:String,
+        default:"blue",
+    },
+    themeColor2:{
+        type:String,
+        default:"red",
+    },
+    themeColor3:{
+        type:String,
+        default:"white",
     }
-
-
 
 },
 
@@ -119,6 +129,9 @@ app.post('/colors', async (req, res) => {
                     footerBackgroundColor:req.body.footerBackgroundColor,
                     radioButtonColor:req.body.radioButtonColor,
                     dropDownButtonColor:req.body.dropDownButtonColor,
+                    themeColor1:req.body.themeColor1,
+                    themeColor2:req.body.themeColor2,
+                    themeColor3:req.body.themeColor3,
                 } 
             }
         );
