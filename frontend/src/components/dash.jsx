@@ -23,6 +23,9 @@ const HeroPage = () => {
   const [footer,setFooter] = useState('')
   const [dropdown,setDropdown] = useState('')
   const [radio,setRadio] = useState('')
+  const [theme1,setTheme1] = useState('')
+  const [theme2,setTheme2] = useState('')
+  const [theme3,setTheme3] = useState('')
 
   
   useEffect(()=>{
@@ -30,21 +33,28 @@ const HeroPage = () => {
     .then((res)=>{
       setMail(res.data.email)
       setName(res.data.username)
-      changeUI(res.data.textColor,res.data.buttonBackgroundColor,res.data.headerBackgroundColor,res.data.footerBackgroundColor,res.data.dropDownButtonColor,res.data.radioButtonColor)
+      changeUI(
+        res.data.textColor,res.data.buttonBackgroundColor,
+        res.data.headerBackgroundColor,res.data.footerBackgroundColor,
+        res.data.dropDownButtonColor,res.data.radioButtonColor,
+        res.data.themeColor1,res.data.themeColor2,res.data.themeColor3
+        )
       setLoading(false)
     })
     .catch((err)=>{
       console.log(err)
     })
 
-    const changeUI = (textcolor,backcolor,header,footer,drop,radio)=>{
+    const changeUI = (textcolor,backcolor,header,footer,drop,radio,theme1,theme2,theme3)=>{
       setButton(`block rounded-lg bg-${backcolor}-600 px-5 py-3 text-sm font-medium text-${textcolor}-500 transition hover:bg-indigo-700 focus:outline-none focus:ring`)
       setHeader(`bg-${header}-200`)
       setFooter(`bg-${footer}-200`)
       setDropdown(`bg-${drop}-200`)
       setRadio(`bg-${radio}-200`)
+      setTheme1(`${theme1}`)
+      setTheme2(`${theme2}`)
+      setTheme3(`${theme3}`)
     }
-
   },[])
 
 
@@ -52,7 +62,7 @@ const HeroPage = () => {
     <>
       {loading && <Loading/>}
       {!loading && <div  className="bg-gradient-to-t from-white via-purple-100 to-indigo-200">
-        <div className="p-4 sm:ml-64 font-one bg-gradient-to-t from-white via-purple-100 to-indigo-200">
+        <div className={`p-4 sm:ml-64 font-one bg-gradient-to-t from-${theme1}-200 via-${theme2}-1200 to-${theme3}-200`}>
           <div className={`p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 ${header}`}>
             <Header name={name} button={button}/>
           </div>

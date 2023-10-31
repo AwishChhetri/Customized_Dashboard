@@ -10,8 +10,6 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [temp,setTemp] = useState('none')
-
   const handleLogin = () => {
     axios
       .post("http://localhost:5000/login", {
