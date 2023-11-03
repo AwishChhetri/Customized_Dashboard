@@ -75,24 +75,30 @@ const userSchema=mongoose.Schema({
 
 const User=new mongoose.model('User', userSchema);
  
-app.post('/register', (req, res) => {
+app.post('/register', async(req, res) => {
     console.log(req.body);
-  
-    const newUser = new User({
-      username: req.body.username,
-      email: req.body.email,
-      password: req.body.password
-    });
-  
-    newUser.save()
-      .then(() => {
-        console.log('User saved successfully');
-        res.json({ msg: "Success" });
-      })
-      .catch((err) => {
-        console.log('Error saving user:', err);
-        res.status(500).json({ msg: "Error" });
-      });
+    const newEmail=await User.findOne({email:req.body.email});
+
+    if(!newEmail){
+        const newUser = new User({
+            username: req.body.username,
+            email: req.body.email,
+            password: req.body.password
+          });
+        
+          newUser.save()
+            .then(() => {
+              console.log('User saved successfully');
+              res.json({ msg: "Success" });
+            })
+            .catch((err) => {
+              console.log('Error saving user:', err);
+              res.status(500).json({ msg: "Error" });
+            });
+
+    }else{
+        res.status(200).json({ msg: "Email Already Exist!" });
+    }
   });
 
 
@@ -113,9 +119,6 @@ app.post("/login",async(req,res)=>{
 
     } })
   
-app.get('/hello',(req,res)=>{
-    res.send("HELLO")
-})
 
 app.post('/colors', async (req, res) => {
     console.log("body color = ",req.body.backgroundColor)
@@ -148,7 +151,7 @@ app.post('/colors', async (req, res) => {
 app.get('/user/:id',async(req,res)=>{
     const userId = req.params.id
     const result=await User.findOne({_id:userId});
-    res.json(result)
+    res.json(result).status(200)
     console.log(result)
 });
 
@@ -157,11 +160,14 @@ app.get('/user/:id',async(req,res)=>{
 
 
 
-app.listen(port,(err)=>{
-    if(err){
-        console.log("Error in Connecting")
-        return
-    }
-    else
+const server=app.listen(port,()=>{
         console.log("Server running at ",port)
 })
+
+
+
+
+
+module.exports = { app, server };
+
+
