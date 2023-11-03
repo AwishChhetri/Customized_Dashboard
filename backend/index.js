@@ -89,7 +89,7 @@ app.post('/register', async(req, res) => {
           newUser.save()
             .then(() => {
               console.log('User saved successfully');
-              res.json({ msg: "Success" });
+              res.status(200).json({ msg: "Success" });
             })
             .catch((err) => {
               console.log('Error saving user:', err);
@@ -97,7 +97,7 @@ app.post('/register', async(req, res) => {
             });
 
     }else{
-        res.status(200).json({ msg: "Email Already Exist!" });
+        res.status(300).json({ msg: "Email Already Exist!" });
     }
   });
 
@@ -105,16 +105,21 @@ app.post('/register', async(req, res) => {
 app.post("/login",async(req,res)=>{
     console.log("This is the login:",req.body)
     const result=await User.findOne({email:req.body.email});
-   console.log(result)
+    console.log(result)
     if(!result)
-     {
-      res.status(404).json({msg:"Not registered"})}
-    else { 
-        if(result.password==req.body.password){
+    {
+      console.log("Not registered")
+      res.status(404).json({msg:"Not registered"})
+    }
+    else
+    { 
+        if(result.password==req.body.password)
+        {
             res.status(200).json({id:result._id})
         }
-        else{
-            res.status(404).json({msg:"Wrong Password"})
+        else
+        {
+            res.status(400).json({msg:"Wrong Password"})
         }
 
     } })

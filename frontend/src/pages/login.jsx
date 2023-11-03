@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useUser } from "./demoAccount";
+import Swal from 'sweetalert2'
 
 const Login = () => {
+  
   const navigate = useNavigate(); 
   const { login } = useUser();
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState("")
 
   const handleLogin = () => {
     axios
@@ -17,18 +19,38 @@ const Login = () => {
         password: password,
       })
       .then((res) => {
-        console.log(res.status);
-        if (res.status === 200) {
+        if(res.status===200)
+        {
           const userData = res.data;
           login(userData);
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'You are Logged In',
+            showConfirmButton: false,
+            timer: 2500
+          })
           navigate(`/dash/${res.data.id}`);
-        } else {
-          window.location.reload();
         }
       })
-      .catch((err) => {
-        console.log("Error in Login -> ", err);
-      });
+      .catch(err=>{
+        if(err.response.status==404)
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'OOPS!!!🫨',
+            text: 'WRONG CREDENTIALS!',
+          })
+        }
+        else if(err.response.status==400)
+        {
+          Swal.fire({
+            icon: 'error',
+            title: '☹️',
+            text: 'WRONG PASSWORD!',
+          })
+        }
+      })
   };
 
   return (
@@ -109,12 +131,12 @@ const Login = () => {
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Not a member?{" "}
-          <a
-            href="#"
+          <Link
+            to='/signup'
             className="font-semibold leading-6 text-indigo-600 hover:text-indigo-500"
           >
             Register Here
-          </a>
+          </Link>
         </p>
       </div>
     </div>

@@ -27,7 +27,6 @@ const HeroPage = () => {
   const [theme2,setTheme2] = useState('')
   const [theme3,setTheme3] = useState('')
 
-  
   useEffect(()=>{
     axios.get(`http://localhost:5000/user/${id}`)
     .then((res)=>{

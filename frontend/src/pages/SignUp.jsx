@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 const SignUp = () => {
 
@@ -18,12 +19,25 @@ const SignUp = () => {
         password : password
       })
       .then((res)=>{
-        console.log(res.status)
-        console.log(res.data.msg)
-        navigate('/login')
+        if(res.status==200)
+        { 
+          Swal.fire({
+            icon: 'success',
+            title: 'User Created 😁',
+            text: 'Log In to continue',
+          })
+          navigate('/login')
+        }
       })
       .catch((err)=>{
-        console.log("Error in Signup -> ",err)
+        if(err.response.status==300)
+        {
+          Swal.fire({
+            icon: 'error',
+            title: 'SORRY!😟',
+            text: 'A user is already created using this email, try using another email',
+          })
+        }
       })
   }
 
