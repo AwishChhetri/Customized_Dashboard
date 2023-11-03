@@ -121,7 +121,7 @@ app.post("/login",async(req,res)=>{
   
 
 app.post('/colors', async (req, res) => {
-    console.log("body color = ",req.body.backgroundColor)
+    console.log("body color = ",req.body)
     try {
         const update = await User.updateMany(
             { _id: req.body.userId },

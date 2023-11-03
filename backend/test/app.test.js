@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const request = supertest(app);
 
 describe('Express App', () => {
-  // Define a test user
+  
   const testUser = {
     username: 'testuser3',
     email: 'testuser@example.com3',
