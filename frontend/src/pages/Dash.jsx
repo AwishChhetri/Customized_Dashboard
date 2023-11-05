@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import  { useState } from 'react'
 import Dashboard from '../components/dash'
 import SideBar from '../components/SideBar'
 import Custom from '../components/custom'
