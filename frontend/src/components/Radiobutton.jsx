@@ -8,7 +8,8 @@ const Radiobutton = (props) => {
   <select
     name="HeadlineAct"
     id="HeadlineAct"
-    class={`mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm ${props.radio}`}
+    class={`mt-1.5 w-full rounded-lg border-gray-300 text-gray-700 sm:text-sm`}
+    style={{backgroundColor: props.radio}}
   >
     <option value="">Please select</option>
     <option value="JM">John Mayer</option>
