@@ -11,6 +11,25 @@ const SignUp = () => {
   const navigate=useNavigate();
 
   const Register = ()=>{
+    const regex = /^(vtu\d{5}@veltech\.edu\.in|[^.]+@(gmail\.com|yahoo\.com|hotmail\.com))$/
+    if(!regex.test(email))
+    {
+      Swal.fire({
+        icon: 'error',
+        title: '🤔',
+        text: 'Invalid Email',
+      })
+      return
+    }
+    if(password.length<=6)
+    {
+      Swal.fire({
+        icon: 'error',
+        title: '🤏☹️',
+        text: 'Password length should be more than 6 letters',
+      })
+      return
+    }
     axios.post(
       'http://localhost:5000/register',
       {

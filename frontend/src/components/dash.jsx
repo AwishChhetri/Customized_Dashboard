@@ -6,12 +6,9 @@ import Header from '../components/header.jsx'
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios";
-import LoadColors from '../components/colors'
 import Loading from "./loading"
 
 const HeroPage = () => {
-
-  LoadColors()
 
   const { id } = useParams()
   const [mail,setMail] = useState('')
