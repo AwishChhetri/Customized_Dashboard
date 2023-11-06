@@ -12,10 +12,19 @@ const SignUp = () => {
 
   const Register = ()=>{
     const regex = /^(vtu\d{5}@veltech\.edu\.in|[^.]+@(gmail\.com|yahoo\.com|hotmail\.com))$/
+    if(username==='' || email==='' || password==='')
+    {
+      Swal.fire({
+        icon: 'warning',
+        title: '🫥',
+        text: 'Fill all the fields',
+      })
+      return
+    }
     if(!regex.test(email))
     {
       Swal.fire({
-        icon: 'error',
+        icon: 'warning',
         title: '🤔',
         text: 'Invalid Email',
       })
@@ -24,7 +33,7 @@ const SignUp = () => {
     if(password.length<=6)
     {
       Swal.fire({
-        icon: 'error',
+        icon: 'warning',
         title: '🤏☹️',
         text: 'Password length should be more than 6 letters',
       })
