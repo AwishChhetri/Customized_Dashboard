@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Header from "./header.jsx";
 import axios from "axios";
 
 const Preference = (props) => {
@@ -67,335 +66,55 @@ const Preference = (props) => {
               <div className="flex items-center flex-col justify-center rounded  h-52  ">
                 Choose color for text :
                 <p className="mt-2">
-                <div className="flex ">
-                  <input
-                    type="radio"
-                    name="text"
-                    onClick={() => setText("red")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-red-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex ">
-                  <input
-                    type="radio"
-                    name="text"
-                    onClick={() => setText("green")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-green-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex ">
-                  <input
-                    type="radio"
-                    name="text"
-                    onClick={() => setText("blue")}
-                  />
-                 <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-blue-400">
-                  </div>
-                  </div>
+                <input type="color" value={text} onChange={(e)=>(setText(e.target.value))}/>
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center rounded  h-52 ">
                 Choose background color :
                 <p className="mt-2">
-                <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="background"
-                    onClick={() => setBack("pink")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-pink-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="background"
-                    onClick={() => setBack("yellow")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-yellow-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1 ">
-                  <input
-                    type="radio"
-                    name="background"
-                    onClick={() => setBack("orange")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-orange-400">
-                  </div>
-                  </div>
+                <input type="color" value={back} onChange={(e)=>(setBack(e.target.value))}/>
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center rounded  h-52 ">
                 Choose color for Header :
                 <p className="mt-2">
-                <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="header"
-                    onClick={() => setHeadbg("pink")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-pink-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1 ">
-                  <input
-                    type="radio"
-                    name="header"
-                    onClick={() => setHeadbg("yellow")}
-                  />
-                   <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-yellow-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="header"
-                    onClick={() => setHeadbg("orange")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-orange-400">
-                  </div>
-                  </div>
+                <input type="color" value={headbg} onChange={(e)=>(setHeadbg(e.target.value))}/>
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center rounded  h-52 ">
                 Choose color for Footer :
                 <p className="mt-2">
-                <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="footer"
-                    onClick={() => setFootbg("pink")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-pink-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="footer"
-                    onClick={() => setFootbg("yellow")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-yellow-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="footer"
-                    onClick={() => setFootbg("orange")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-orange-400">
-                  </div>
-                  </div>
+                <input type="color" value={footbg} onChange={(e)=>(setFootbg(e.target.value))}/>
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center rounded  h-52 ">
                 Choose color for Radio Button :
                 <p className="mt-2">
-                <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="radio"
-                    onClick={() => setRadio("pink")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-pink-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1 ">
-                  <input
-                    type="radio"
-                    name="radio"
-                    onClick={() => setRadio("yellow")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-yellow-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="radio"
-                    onClick={() => setRadio("orange")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-orange-400">
-                  </div>
-                  </div>
+                <input type="color" value={radio} onChange={(e)=>(setRadio(e.target.value))}/>
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center rounded  h-52 ">
                 Choose color for Dropdownbutton:
                 <p className="mt-2">
-                <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="drop"
-                    onClick={() => setDrop("pink")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-pink-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="drop"
-                    onClick={() => setDrop("yellow")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-yellow-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="drop"
-                    onClick={() => setDrop("orange")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-orange-400">
-                  </div>
-                  </div>
+                <input type="color" value={drop} onChange={(e)=>(setDrop(e.target.value))}/>
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center rounded  h-52 ">
                 Choose color for Theme gradient :
                 <p className="mt-2">
-                <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="theme1"
-                    onClick={() => setTheme1("pink")}
-                  />
-                   <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-pink-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1 ">
-                  <input
-                    type="radio"
-                    name="theme1"
-                    onClick={() => setTheme1("yellow")}
-                  />
-                  
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-yellow-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="theme1"
-                    onClick={() => setTheme1("orange")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-orange-400">
-                  </div>
-                  </div>
+                <input type="color" value={theme1} onChange={(e)=>(setTheme1(e.target.value))}/>
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center rounded  h-52 ">
                 Choose color for Theme gradient :
                 <p className="mt-2">
-                <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="theme2"
-                    onClick={() => setTheme2("pink")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-pink-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="theme2"
-                    onClick={() => setTheme2("yellow")}
-                  />
-                   <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-yellow-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="theme2"
-                    onClick={() => setTheme2("orange")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-orange-400">
-                  </div>
-                  </div>
+                <input type="color" value={theme2} onChange={(e)=>(setTheme2(e.target.value))}/>
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center rounded  h-52 ">
                 Choose color for Theme gradient :
                 <p className="mt-2">
-                <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="theme3"
-                    onClick={() => setTheme3("pink")}
-                  />
-                 <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-pink-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="theme3"
-                    onClick={() => setTheme3("yellow")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-yellow-400">
-                  </div>
-                  </div>
-                  <br />
-                  <div className="flex m-1">
-                  <input
-                    type="radio"
-                    name="theme3"
-                    onClick={() => setTheme3("orange")}
-                  />
-                  <div className=
-                  "m-0 ml-2 p-0  h-5 w-24 bg-orange-400">
-                  </div>
-                  </div>
+                <input type="color" value={theme3} onChange={(e)=>(setTheme3(e.target.value))}/>
                 </p>
               </div>
             </div>

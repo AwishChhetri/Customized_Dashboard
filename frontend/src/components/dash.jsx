@@ -6,19 +6,18 @@ import Header from '../components/header.jsx'
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import axios from "axios";
-import LoadColors from '../components/colors'
 import Loading from "./loading"
 
 const HeroPage = () => {
-
-  LoadColors()
 
   const { id } = useParams()
   const [mail,setMail] = useState('')
   const [name,setName] = useState('')
   const [loading,setLoading] = useState(true)
 
-  const [button,setButton] = useState('block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-purple-500 transition hover:bg-indigo-700 focus:outline-none focus:ring')
+  const [buttonbg,setButtonbg] = useState('')
+  const [buttontext,setButtontext] = useState('')
+
   const [header,setHeader] = useState('')
   const [footer,setFooter] = useState('')
   const [dropdown,setDropdown] = useState('')
@@ -45,11 +44,12 @@ const HeroPage = () => {
     })
 
     const changeUI = (textcolor,backcolor,header,footer,drop,radio,theme1,theme2,theme3)=>{
-      setButton(`block rounded-lg bg-${backcolor}-600 px-5 py-3 text-sm font-medium text-${textcolor}-500 transition hover:bg-indigo-700 focus:outline-none focus:ring`)
-      setHeader(`bg-${header}-200`)
-      setFooter(`bg-${footer}-200`)
-      setDropdown(`bg-${drop}-200`)
-      setRadio(`bg-${radio}-200`)
+      setButtonbg(backcolor)
+      setButtontext(textcolor)
+      setHeader(header)
+      setFooter(footer)
+      setDropdown(drop)
+      setRadio(radio)
       setTheme1(`${theme1}`)
       setTheme2(`${theme2}`)
       setTheme3(`${theme3}`)
@@ -60,10 +60,10 @@ const HeroPage = () => {
   return (
     <>
       {loading && <Loading/>}
-      {!loading && <div  className="bg-gradient-to-t from-white via-purple-100 to-indigo-200">
-        <div className={`p-4 sm:ml-64 font-one bg-gradient-to-t from-${theme1}-200 via-${theme2}-1200 to-${theme3}-200`}>
-          <div className={`p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 ${header}`}>
-            <Header name={name} button={button}/>
+      {!loading && <div>
+        <div className={`p-4 sm:ml-64 font-one`} style={{background: `linear-gradient(to top,${theme1},${theme2},${theme3})`}}>
+          <div className={`p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700`} style={{backgroundColor: header}}>
+            <Header name={name} buttonbg={buttonbg} buttontext={buttontext}/>
           </div>
           <Hero/>
           <div className="grid grid-cols-2 gap-4 mb-4 ">

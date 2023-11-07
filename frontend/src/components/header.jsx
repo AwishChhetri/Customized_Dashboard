@@ -40,7 +40,8 @@ const Header = (props) => {
           </button>
   
           <button
-            className={props.button}
+            className='block rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring'
+            style={{backgroundColor: props.buttonbg,color: props.buttontext}}
             type="button"
           >
             Create Post
