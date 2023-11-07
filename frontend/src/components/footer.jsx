@@ -16,8 +16,8 @@ const Footer = (props) => {
     </div>
 
     <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
-     Hello friends how are you . I am under water .
-     bud bud bud.,.,.,.,.,,
+     Your accout,your choice! 
+ 
     </p>
 
     <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">

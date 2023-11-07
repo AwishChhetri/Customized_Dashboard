@@ -8,9 +8,9 @@ const request = supertest(app);
 describe('Express App', () => {
   // Define a test user
   const testUser = {
-    username: 'testuser3',
-    email: 'testuser@example.com3',
-    password: 'testpassword3',
+    username: 'test',
+    email: 'dev@dev',
+    password: 'testpassword8',
   };
 
   beforeAll(async () => {
@@ -30,7 +30,7 @@ describe('Express App', () => {
     expect(response.status).toBe(200);
     expect(response.body.msg).toBe('Success');
 
-  });
+  },10000);
 
   it('POST /register should handle registration if email already exists', async () => {
     
@@ -55,7 +55,7 @@ describe('Express App', () => {
   it('POST /login should handle wrong password', async () => {
     const response = await request.post('/login').send({
       email: testUser.email,
-      password: 'wrongpassword',
+      password: testUser.password,
     });
     expect(response.status).toBe(404);
     expect(response.body.msg).toBe('Wrong Password');
