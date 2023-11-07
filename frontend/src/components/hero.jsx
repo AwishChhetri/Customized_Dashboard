@@ -16,19 +16,21 @@ const Hero = () => {
         </div>
   
         <div className="lg:py-24">
-          <h2 className="text-3xl font-bold sm:text-4xl">Grow your audience</h2>
+          <h2 className="text-3xl font-bold sm:text-4xl">UI Personalization</h2>
   
           <p className="mt-4 text-gray-600">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut qui hic
-            atque tenetur quis eius quos ea neque sunt, accusantium soluta minus
-            veniam tempora deserunt? Molestiae eius quidem quam repellat.
+          Certainly! Personalization in user interfaces is the future of user experience. It's about creating tailored, individualized experiences for users rather than offering a one-size-fits-all approach. Through customization, UIs can better meet the diverse needs of users, offering the right choices and adapting to individual preferences. Personalization is not just a trend but a fundamental aspect of modern UI design, enabling a more engaging and user-centric experience for everyone.
           </p>
   
           <a
             href="#"
             className="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
           >
+<<<<<<< HEAD
             Get Started Today
+=======
+            Buttons
+>>>>>>> b5a5547c6e71d6d7c76056ea0956831dbd53ea57
           </a>
         </div>
       </div>

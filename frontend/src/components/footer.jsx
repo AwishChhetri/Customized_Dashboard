@@ -16,7 +16,7 @@ const Footer = (props) => {
     </div>
 
     <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
-     Your accout,your choice! 
+     Customized UI
  
     </p>
 

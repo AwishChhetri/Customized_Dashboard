@@ -78,7 +78,7 @@ const User=new mongoose.model('User', userSchema);
 app.post('/register', async(req, res) => {
     console.log(req.body);
     const newEmail=await User.findOne({email:req.body.email});
-
+    
     if(!newEmail){
         const newUser = new User({
             username: req.body.username,
@@ -119,7 +119,7 @@ app.post("/login",async(req,res)=>{
         }
         else
         {
-            res.status(404).json({msg:"Wrong Password"})
+            res.status(400).json({msg:"Wrong Password"})
         }
 
     } })
@@ -173,6 +173,6 @@ const server=app.listen(port,()=>{
 
 
 
-module.exports = { app, server };
+module.exports = { app, server, User};
 
 

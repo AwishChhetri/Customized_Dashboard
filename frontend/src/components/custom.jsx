@@ -46,7 +46,7 @@ const Preference = (props) => {
             Start Customizing
           </h1>
 
-          <p className="mx-auto mt-4 max-w-md font-two text-center text-white">
+          <p className="mx-auto mt-4 max-w-md font-two text-center text-black">
             Fill the form to set your preference. Which will be reflected in
             your dashboard.
           </p>
@@ -63,10 +63,10 @@ const Preference = (props) => {
             </label>
 
             <div className="grid grid-cols-2 gap-4 mb-4 font-one">
-              <div className="flex items-center flex-col justify-center rounded  h-52  ">
+              <div className="flex items-center flex-col justify-center  h-52  ">
                 Choose color for text :
                 <p className="mt-2">
-                <input type="color" value={text} onChange={(e)=>(setText(e.target.value))} placeholder="Choose a color"/>
+                <input type="color"  value={text} onChange={(e)=>(setText(e.target.value))} />
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center rounded  h-52 ">

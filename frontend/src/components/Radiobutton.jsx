@@ -1,6 +1,7 @@
 const Radiobutton = (props) => {
   return (
     <div>
+    {/* <div>
   <label for="HeadlineAct" class="block text-sm font-medium text-gray-900">
     {props.name}
   </label>
@@ -20,6 +21,13 @@ const Radiobutton = (props) => {
     <option value="BG">Buddy Guy</option>
     <option value="EC">Eric Clapton</option>
   </select>
+</div> */}
+<div class="flex flex-wrap gap-3">
+  <input class="p-2 " type="radio" name='Male' /> Male
+  <input class="p-2" type="radio"  name='Female'/>Female
+  <input class="p-2" type="radio"  name='Female'/>Others
+</div>
+
 </div>
   );
 };
