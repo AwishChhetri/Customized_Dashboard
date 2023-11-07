@@ -26,11 +26,7 @@ const Hero = () => {
             href="#"
             className="mt-8 inline-block rounded bg-indigo-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring focus:ring-yellow-400"
           >
-<<<<<<< HEAD
-            Get Started Today
-=======
             Buttons
->>>>>>> b5a5547c6e71d6d7c76056ea0956831dbd53ea57
           </a>
         </div>
       </div>

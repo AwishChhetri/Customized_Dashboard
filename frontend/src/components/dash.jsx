@@ -68,21 +68,6 @@ const HeroPage = () => {
           <Hero/>
           <div className="grid grid-cols-2 gap-4 mb-4 ">
               <div className="flex items-center flex-col justify-center rounded  h-28  ">
-<<<<<<< HEAD
-                <p className="lg:text-2xl">My email:{mail}</p>
-                <p className=" flex   font-two lg:flex-row lg:text-sm sm:text-xs flex-col sm:text-clip sm:overflow-auto  text-black ">
-                  <Radiobutton name="Indian" radio={radio}/>
-                </p>
-              </div>
-              <div className="flex flex-col items-center justify-center rounded  h-28 ">
-                <p className="lg:text-2xl">Id:{id}</p>
-                <p className="lg:text-sm font-two text-black  flex flex-col ">
-                  <DropDown
-                    name="Languages"
-                    option1="Hindi"
-                    option2="English"
-                    option3="Japanese"
-=======
                 <p className="lg:text-2xl">Gender</p>
                 <p className=" flex   font-two lg:flex-row lg:text-sm sm:text-xs flex-col sm:text-clip sm:overflow-auto  text-black ">
                   <Radiobutton name="Red" radio={radio}/>
@@ -96,7 +81,6 @@ const HeroPage = () => {
                     option1="India"
                     option2="Pakistan"
                     option3="Others"
->>>>>>> b5a5547c6e71d6d7c76056ea0956831dbd53ea57
                     drop={dropdown}
                   />
                 </p>

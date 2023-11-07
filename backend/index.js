@@ -65,7 +65,12 @@ const userSchema=mongoose.Schema({
     themeColor3:{
         type:String,
         default:"white",
-    }
+    },
+    iconColor:{
+        type:String,
+        default:"white",
+    },
+   
 
 },
 
@@ -140,6 +145,7 @@ app.post('/colors', async (req, res) => {
                     themeColor1:req.body.themeColor1,
                     themeColor2:req.body.themeColor2,
                     themeColor3:req.body.themeColor3,
+                    iconColor:req.body.iconColor,
                 } 
             }
         );
