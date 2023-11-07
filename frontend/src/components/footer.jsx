@@ -16,44 +16,44 @@ const Footer = (props) => {
     </div>
 
     <p className="mx-auto mt-6 max-w-md text-center leading-relaxed text-gray-500">
-     Customized UI
+     Features of this UI
  
     </p>
 
     <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
       <li>
         <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-          About
+          Security
         </a>
       </li>
 
       <li>
         <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-          Careers
+          User-Centric
         </a>
       </li>
 
       <li>
         <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-          History
+          User Profilling
         </a>
       </li>
 
       <li>
         <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-          Services
+          Customization
         </a>
       </li>
 
       <li>
         <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-          Projects
+          Adaptive UI
         </a>
       </li>
 
       <li>
         <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
-          Blog
+          User Experience
         </a>
       </li>
     </ul>
