@@ -66,7 +66,7 @@ const Preference = (props) => {
               <div className="flex items-center flex-col justify-center rounded  h-52  ">
                 Choose color for text :
                 <p className="mt-2">
-                <input type="color" value={text} onChange={(e)=>(setText(e.target.value))}/>
+                <input type="color" value={text} onChange={(e)=>(setText(e.target.value))} placeholder="Choose a color"/>
                 </p>
               </div>
               <div className="flex flex-col items-center justify-center rounded  h-52 ">

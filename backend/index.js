@@ -11,7 +11,7 @@ app.use(cors())
 
 
 
-mongoose.connect("mongodb+srv://abishchhetri2502:HMHpKTGa4wPLkr3Y@cluster0.3igf2ot.mongodb.net/?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true }).then(()=>{
+mongoose.connect("mongodb+srv://UIPersonalization:yZ5fNmDzLaCY1HAW@cluster0.absh9oa.mongodb.net/?retryWrites=true&w=majority",{ useNewUrlParser: true, useUnifiedTopology: true }).then(()=>{
     console.log('connected successful')}).catch((err)=>{
         console.log(err)
 })
