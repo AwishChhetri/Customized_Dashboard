@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "./loading";
+import '../css/custom.css'
 
 const Preference = (props) => {
   const { id } = useParams();
@@ -87,64 +88,64 @@ const Preference = (props) => {
             Choose color for text :
           </label>
           <div className="grid grid-cols-2 gap-4 mb-4 font-one">
-            <div className="flex items-center flex-col justify-center  h-52  ">
-              Choose color for text :
+            <div className="flex items-center flex-col justify-center  h-20">
+              Button Text
               <p className="mt-2">
-              <input type="color"  value={text} onChange={(e)=>(setText(e.target.value))} />
+              <input type="color"  value={text} onChange={(e)=>(setText(e.target.value))} id="color"/>
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center rounded  h-52 ">
-              Choose background color :
+            <div className="flex flex-col items-center justify-center rounded  h-20 ">
+              Button Background
               <p className="mt-2">
-              <input type="color" value={back} onChange={(e)=>(setBack(e.target.value))}/>
+              <input type="color" value={back} onChange={(e)=>(setBack(e.target.value))} id="color"/>
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center rounded  h-52 ">
-              Choose color for Header :
+            <div className="flex flex-col items-center justify-center rounded  h-20 ">
+              Header
               <p className="mt-2">
-              <input type="color" value={headbg} onChange={(e)=>(setHeadbg(e.target.value))}/>
+              <input type="color" value={headbg} onChange={(e)=>(setHeadbg(e.target.value))} id="color"/>
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center rounded  h-52 ">
-              Choose color for Footer :
+            <div className="flex flex-col items-center justify-center rounded  h-20 ">
+              Footer
               <p className="mt-2">
-              <input type="color" value={footbg} onChange={(e)=>(setFootbg(e.target.value))}/>
+              <input type="color" value={footbg} onChange={(e)=>(setFootbg(e.target.value))} id="color"/>
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center rounded  h-52 ">
-              Choose color for Radio Button :
+            <div className="flex flex-col items-center justify-center rounded  h-20 ">
+              Radio Buttons
               <p className="mt-2">
-              <input type="color" value={radio} onChange={(e)=>(setRadio(e.target.value))}/>
+              <input type="color" value={radio} onChange={(e)=>(setRadio(e.target.value))} id="color"/>
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center rounded  h-52 ">
-              Choose color for Dropdownbutton:
+            <div className="flex flex-col items-center justify-center rounded  h-20 ">
+              Dropdown Buttons
               <p className="mt-2">
-              <input type="color" value={drop} onChange={(e)=>(setDrop(e.target.value))}/>
+              <input type="color" value={drop} onChange={(e)=>(setDrop(e.target.value))} id="color"/>
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center rounded  h-52 ">
-              Choose color for Theme gradient :
+            <div className="flex flex-col items-center justify-center rounded  h-20 ">
+              Bottom Theme
               <p className="mt-2">
-              <input type="color" value={theme1} onChange={(e)=>(setTheme1(e.target.value))}/>
+              <input type="color" value={theme1} onChange={(e)=>(setTheme1(e.target.value))} id="color"/>
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center rounded  h-52 ">
-              Choose color for Theme gradient :
+            <div className="flex flex-col items-center justify-center rounded  h-20 ">
+              Center Theme
               <p className="mt-2">
-              <input type="color" value={theme2} onChange={(e)=>(setTheme2(e.target.value))}/>
+              <input type="color" value={theme2} onChange={(e)=>(setTheme2(e.target.value))} id="color"/>
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center rounded  h-52 ">
-              Choose color for Theme gradient :
+            <div className="flex flex-col items-center justify-center rounded  h-20 ">
+              Top Theme
               <p className="mt-2">
-              <input type="color" value={theme3} onChange={(e)=>(setTheme3(e.target.value))}/>
+              <input type="color" value={theme3} onChange={(e)=>(setTheme3(e.target.value))} id="color"/>
               </p>
             </div>
-            <div className="flex flex-col items-center justify-center rounded  h-52 ">
-              Choose color for Icons :
+            <div className="flex flex-col items-center justify-center rounded  h-20 ">
+              Icons
               <p className="mt-2">
-              <input type="color" value={iconColor} onChange={(e)=>(setIconColor(e.target.value))}/>
+              <input type="color" value={iconColor} onChange={(e)=>(setIconColor(e.target.value))} id="color"/>
               </p>
             </div>
           </div>

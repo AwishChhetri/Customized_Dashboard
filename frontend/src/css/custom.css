@@ -1,0 +1,13 @@
+#color::-webkit-color-swatch{
+    border-radius: 10px;
+    border: none;
+}
+
+#color{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 70px;
+    height: 60px;
+    background-color: transparent;    
+}
