@@ -14,6 +14,7 @@ const Preference = (props) => {
   const [theme1, setTheme1] = useState("");
   const [theme2, setTheme2] = useState("");
   const [theme3, setTheme3] = useState("");
+  const [iconColor,setIconColor] = useState("")
 
   const showcolors = () => {
     axios
@@ -27,6 +28,7 @@ const Preference = (props) => {
         themeColor1: theme1,
         themeColor2: theme2,
         themeColor3: theme3,
+        iconColor: iconColor,
         userId: id,
       })
       .then((res) => {
@@ -115,6 +117,12 @@ const Preference = (props) => {
                 Choose color for Theme gradient :
                 <p className="mt-2">
                 <input type="color" value={theme3} onChange={(e)=>(setTheme3(e.target.value))}/>
+                </p>
+              </div>
+              <div className="flex flex-col items-center justify-center rounded  h-52 ">
+                Choose color for Icons :
+                <p className="mt-2">
+                <input type="color" value={iconColor} onChange={(e)=>(setIconColor(e.target.value))}/>
                 </p>
               </div>
             </div>

@@ -11,7 +11,6 @@ import Loading from "./loading"
 const HeroPage = () => {
 
   const { id } = useParams()
-  const [mail,setMail] = useState('')
   const [name,setName] = useState('')
   const [loading,setLoading] = useState(true)
 
@@ -25,17 +24,17 @@ const HeroPage = () => {
   const [theme1,setTheme1] = useState('')
   const [theme2,setTheme2] = useState('')
   const [theme3,setTheme3] = useState('')
+  const [iconColor,setIconColor] = useState('')
 
   useEffect(()=>{
     axios.get(`http://localhost:5000/user/${id}`)
     .then((res)=>{
-      setMail(res.data.email)
       setName(res.data.username)
       changeUI(
         res.data.textColor,res.data.buttonBackgroundColor,
         res.data.headerBackgroundColor,res.data.footerBackgroundColor,
         res.data.dropDownButtonColor,res.data.radioButtonColor,
-        res.data.themeColor1,res.data.themeColor2,res.data.themeColor3
+        res.data.themeColor1,res.data.themeColor2,res.data.themeColor3,res.data.iconColor
         )
       setLoading(false)
     })
@@ -43,7 +42,7 @@ const HeroPage = () => {
       console.log(err)
     })
 
-    const changeUI = (textcolor,backcolor,header,footer,drop,radio,theme1,theme2,theme3)=>{
+    const changeUI = (textcolor,backcolor,header,footer,drop,radio,theme1,theme2,theme3,iconColor)=>{
       setButtonbg(backcolor)
       setButtontext(textcolor)
       setHeader(header)
@@ -53,6 +52,7 @@ const HeroPage = () => {
       setTheme1(`${theme1}`)
       setTheme2(`${theme2}`)
       setTheme3(`${theme3}`)
+      setIconColor(iconColor)
     }
   },[])
 
@@ -86,7 +86,7 @@ const HeroPage = () => {
                 </p>
               </div>
             </div>
-          <Footer foot={footer}/>
+          <Footer foot={footer} iconColor={iconColor}/>
         </div>
       </div>}
     </>
