@@ -16,6 +16,26 @@ const Preference = (props) => {
   const [theme3, setTheme3] = useState("");
   const [iconColor,setIconColor] = useState("")
 
+  useEffect(()=>{
+    axios.get(`http://localhost:5000/user/${id}`)
+    .then((res)=>{
+        setText(res.data.textColor)
+        setBack(res.data.buttonBackgroundColor)
+        setHeadbg(res.data.headerBackgroundColor)
+        setFootbg(res.data.footerBackgroundColor)
+        setDrop(res.data.dropDownButtonColor)
+        setRadio(res.data.radioButtonColor)
+        setTheme1(res.data.themeColor1)
+        setTheme2(res.data.themeColor2)
+        setTheme3(res.data.themeColor3)
+        setIconColor(res.data.iconColor)
+        console.log(res)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  },[])
+
   const showcolors = () => {
     axios
       .post("http://localhost:5000/colors", {
@@ -63,7 +83,6 @@ const Preference = (props) => {
               {" "}
               Choose color for text :
             </label>
-
             <div className="grid grid-cols-2 gap-4 mb-4 font-one">
               <div className="flex items-center flex-col justify-center  h-52  ">
                 Choose color for text :
