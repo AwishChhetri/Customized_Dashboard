@@ -9,7 +9,7 @@ const Footer = (props) => {
   Plugins:
     - @tailwindcss/forms
 */}
-<footer style={{backgroundColor: props.foot}}>
+<footer style={{backgroundColor: props.foot}}  onClick={()=>props.Fire(2)}>
   <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 lg:px-8">
     <div className="flex justify-center text-teal-600">
       
@@ -22,46 +22,45 @@ const Footer = (props) => {
 
     <ul className="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:gap-12">
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
+        <a className="text-gray-700 transition hover:text-gray-700/75">
           Security
         </a>
       </li>
 
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
+        <a className="text-gray-700 transition hover:text-gray-700/75">
           User-Centric
         </a>
       </li>
 
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
+        <a className="text-gray-700 transition hover:text-gray-700/75">
           User Profilling
         </a>
       </li>
 
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
+        <a className="text-gray-700 transition hover:text-gray-700/75">
           Customization
         </a>
       </li>
 
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
+        <a className="text-gray-700 transition hover:text-gray-700/75">
           Adaptive UI
         </a>
       </li>
 
       <li>
-        <a className="text-gray-700 transition hover:text-gray-700/75" href="/">
+        <a className="text-gray-700 transition hover:text-gray-700/75">
           User Experience
         </a>
       </li>
     </ul>
 
-    <ul className="mt-12 flex justify-center gap-6 md:gap-8">
+    <ul className="mt-12 flex justify-center gap-6 md:gap-8" onClick={(e)=>props.InnerFire(e,4)}>
       <li>
         <a
-          href="/"
           rel="noreferrer"
           target="_blank"
           className="text-gray-700 transition hover:text-gray-700/75"
@@ -85,9 +84,7 @@ const Footer = (props) => {
 
       <li>
         <a
-          href="/"
           rel="noreferrer"
-          target="_blank"
           className="text-gray-700 transition hover:text-gray-700/75"
         >
           <span className="sr-only">Instagram</span>
@@ -109,9 +106,7 @@ const Footer = (props) => {
 
       <li>
         <a
-          href="/"
           rel="noreferrer"
-          target="_blank"
           className="text-gray-700 transition hover:text-gray-700/75"
         >
           <span className="sr-only">Twitter</span>
@@ -131,9 +126,7 @@ const Footer = (props) => {
 
       <li>
         <a
-          href="/"
           rel="noreferrer"
-          target="_blank"
           className="text-gray-700 transition hover:text-gray-700/75"
         >
           <span className="sr-only">GitHub</span>
@@ -155,9 +148,7 @@ const Footer = (props) => {
 
       <li>
         <a
-          href="/"
           rel="noreferrer"
-          target="_blank"
           className="text-gray-700 transition hover:text-gray-700/75"
         >
           <span className="sr-only">Dribbble</span>

@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from "react";
+import Radiobutton from "./Radiobutton"
+import DropDown from "./dropdown"
+import Footer from '../components/footer.jsx'
+import Hero from '../components/hero'
+import Header from "./header.jsx";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "./loading";
+import Swal from 'sweetalert2'
 import '../css/custom.css'
 
 const Preference = (props) => {
   const { id } = useParams();
 
+  const [name,setName] = useState('')
+  
   const [text, setText] = useState("");
   const [back, setBack] = useState("");
   const [headbg, setHeadbg] = useState("");
@@ -22,6 +30,7 @@ const Preference = (props) => {
   useEffect(()=>{
     axios.get(`http://localhost:5000/user/${id}`)
     .then((res)=>{
+        setName(res.data.username)
         setText(res.data.textColor)
         setBack(res.data.buttonBackgroundColor)
         setHeadbg(res.data.headerBackgroundColor)
@@ -39,7 +48,7 @@ const Preference = (props) => {
     })
   },[])
 
-  const showcolors = () => {
+  const ApplyChanges = () => {
     axios
       .post("http://localhost:5000/colors", {
         textColor: text,
@@ -61,105 +70,129 @@ const Preference = (props) => {
       .catch((err) => {
         console.log("error in saving colors -> ", err);
       });
-  };
+  }
+
+  const Fire = async(e,val)=>{
+    if(val===1)
+    {
+      const { value: color } = await Swal.fire({
+        title: "Header",
+        html: `
+          <input id="swal-input1" type="color" value=${headbg}>
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          return (
+            document.getElementById("swal-input1").value
+          )
+        }
+      })
+      if(color)
+        setHeadbg(color)
+    }
+    if(val===2)
+    {
+      const { value: color } = await Swal.fire({
+        title: "Footer",
+        html: `
+          <input id="swal-input1" type="color" value=${footbg}>
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          return (
+            document.getElementById("swal-input1").value
+          )
+        }
+      })
+      if(color){
+        setFootbg(color)
+      }
+    }
+  }
+
+  const InnerFire = async(e,val)=>{
+    e.stopPropagation()
+    if(val===3)
+    {
+      const { value: color } = await Swal.fire({
+        title: "Button",
+        html: `
+          <p>Text</p>
+          <input id="swal-input1" type="color" value=${text}>
+          <p>Background</p>
+          <input id="swal-input2" type="color" value=${back}>
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          return [
+            document.getElementById("swal-input1").value,
+            document.getElementById("swal-input2").value
+          ]
+        }
+      })
+      if(color[0]){
+        setText(color[0])
+      }
+      if(color[1]){
+        setBack(color[1])
+      }
+    }
+    if(val===4)
+    {
+      const { value: color } = await Swal.fire({
+        title: "Icons",
+        html: `
+          <input id="swal-input1" type="color" value=${iconColor}>
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          return (
+            document.getElementById("swal-input1").value
+          )
+        }
+      })
+      if(color)
+      {
+        setIconColor(color)
+      }
+    }
+  }
 
   return (
     <>
       {loading && <Loading/>}
-      {!loading && <div className="ml-300px mx-auto max-w-screen-x3 px-4 py-16   sm:px-6 lg:pl-72 justify-center">
-      <div className="mx-auto max-w-2xl">
-        <h1 className="text-center text-2xl font-bold font-one text-black sm:text-3xl">
-          Start Customizing
-        </h1>
-
-        <p className="mx-auto mt-4 max-w-md font-two text-center text-black">
-          Fill the form to set your preference. Which will be reflected in
-          your dashboard.
-        </p>
-
-        <form
-          action=""
-          className="mb-0 mt-6 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8"
-        >
-          <p className="text-center text-lg font-medium font-two text-indigo-800"> Let's Change it!</p>
-
-          <label htmlFor="email" className="sr-only">
-            {" "}
-            Choose color for text :
-          </label>
-          <div className="grid grid-cols-2 gap-4 mb-4 font-one">
-            <div className="flex items-center flex-col justify-center  h-20">
-              Button Text
-              <p className="mt-2">
-              <input type="color"  value={text} onChange={(e)=>(setText(e.target.value))} id="color"/>
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center rounded  h-20 ">
-              Button Background
-              <p className="mt-2">
-              <input type="color" value={back} onChange={(e)=>(setBack(e.target.value))} id="color"/>
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center rounded  h-20 ">
-              Header
-              <p className="mt-2">
-              <input type="color" value={headbg} onChange={(e)=>(setHeadbg(e.target.value))} id="color"/>
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center rounded  h-20 ">
-              Footer
-              <p className="mt-2">
-              <input type="color" value={footbg} onChange={(e)=>(setFootbg(e.target.value))} id="color"/>
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center rounded  h-20 ">
-              Radio Buttons
-              <p className="mt-2">
-              <input type="color" value={radio} onChange={(e)=>(setRadio(e.target.value))} id="color"/>
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center rounded  h-20 ">
-              Dropdown Buttons
-              <p className="mt-2">
-              <input type="color" value={drop} onChange={(e)=>(setDrop(e.target.value))} id="color"/>
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center rounded  h-20 ">
-              Bottom Theme
-              <p className="mt-2">
-              <input type="color" value={theme1} onChange={(e)=>(setTheme1(e.target.value))} id="color"/>
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center rounded  h-20 ">
-              Center Theme
-              <p className="mt-2">
-              <input type="color" value={theme2} onChange={(e)=>(setTheme2(e.target.value))} id="color"/>
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center rounded  h-20 ">
-              Top Theme
-              <p className="mt-2">
-              <input type="color" value={theme3} onChange={(e)=>(setTheme3(e.target.value))} id="color"/>
-              </p>
-            </div>
-            <div className="flex flex-col items-center justify-center rounded  h-20 ">
-              Icons
-              <p className="mt-2">
-              <input type="color" value={iconColor} onChange={(e)=>(setIconColor(e.target.value))} id="color"/>
-              </p>
+      {!loading && <div className={`p-4 sm:ml-64 font-one`} style={{background: `linear-gradient(to top,${theme1},${theme2},${theme3})`}}>
+          <div className="">
+            <div className={`p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700`} style={{backgroundColor: headbg}} onClick={(e)=>Fire(e,1)}>
+              <Header name={name} buttonbg={back} buttontext={text} InnerFire={InnerFire}/>
             </div>
           </div>
-          <div className="flex flex-col items-center justify-center">
-            <button
-              className="block rounded-lg bg-indigo-400 px-5 py-3 text-sm font-medium text-white transition hover:bg-indigo-700 focus:outline-none focus:ring"
-              onClick={() => showcolors()}
-            >
-              Apply Changes
-            </button>
+          <Hero/>
+          <div className="grid grid-cols-2 gap-4 mb-4 ">
+              <div className="flex items-center flex-col justify-center rounded  h-28  ">
+                <p className="lg:text-2xl">Gender</p>
+                <p className=" flex   font-two lg:flex-row lg:text-sm sm:text-xs flex-col sm:text-clip sm:overflow-auto  text-black ">
+                  <Radiobutton name="Red" radio={radio}/>
+                </p>
+              </div>
+              <div className="flex flex-col items-center justify-center rounded  h-28 ">
+                <p className="lg:text-2xl">Country</p>
+                <p className="lg:text-sm font-two text-black  flex flex-col ">
+                  <DropDown
+                    name="Choose your country"
+                    option1="India"
+                    option2="Pakistan"
+                    option3="Others"
+                    drop={drop}
+                  />
+                </p>
+              </div>
+            </div>
+          <div  onClick={(e)=>Fire(e,2)}>
+            <Footer foot={footbg} iconColor={iconColor} Fire={Fire} InnerFire={InnerFire}/>
           </div>
-        </form>
-      </div>
-    </div>}
+          <button onClick={ApplyChanges}>Apply Changes</button>
+        </div>}
     </>
   );
 };
