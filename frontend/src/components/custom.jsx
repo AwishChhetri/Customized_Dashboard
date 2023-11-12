@@ -27,6 +27,14 @@ const Preference = (props) => {
   const [iconColor,setIconColor] = useState("")
   const [loading,setLoading] = useState(true)
 
+  const startAlert = ()=>{
+    Swal.fire({
+      position: 'center',
+      title: `Click on the element to edit.`,
+      text: `NOTE : The changes will only reflect after hitting the 'Apply Changes' button.`,
+    })
+  }
+
   useEffect(()=>{
     axios.get(`http://localhost:5000/user/${id}`)
     .then((res)=>{
@@ -46,9 +54,11 @@ const Preference = (props) => {
     .catch((err)=>{
       console.log(err)
     })
+    startAlert()
   },[])
 
-  const ApplyChanges = () => {
+  const ApplyChanges = (e) => {
+    e.stopPropagation()
     axios
       .post("http://localhost:5000/colors", {
         textColor: text,
@@ -73,6 +83,7 @@ const Preference = (props) => {
   }
 
   const Fire = async(e,val)=>{
+    e.stopPropagation()
     if(val===1)
     {
       const { value: color } = await Swal.fire({
@@ -107,6 +118,31 @@ const Preference = (props) => {
       if(color){
         setFootbg(color)
       }
+    }
+    if(val===5)
+    {
+      const { value: color } = await Swal.fire({
+        title: "Theme",
+        html: `
+          <p>Top Color</p>
+          <input id="swal-input1" type="color" value=${theme1}>
+          <p>Center Color</p>
+          <input id="swal-input2" type="color" value=${theme2}>
+          <p>Bottom Color</p>
+          <input id="swal-input3" type="color" value=${theme3}>
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          return [
+            document.getElementById("swal-input1").value,
+            document.getElementById("swal-input2").value,
+            document.getElementById("swal-input3").value
+          ]
+        }
+      })
+      if(color[0])setTheme3(color[0])
+      if(color[1])setTheme2(color[1])
+      if(color[2])setTheme1(color[2])
     }
   }
 
@@ -161,7 +197,7 @@ const Preference = (props) => {
   return (
     <>
       {loading && <Loading/>}
-      {!loading && <div className={`p-4 sm:ml-64 font-one`} style={{background: `linear-gradient(to top,${theme1},${theme2},${theme3})`}}>
+      {!loading && <div className={`p-4 sm:ml-64 font-one`} style={{background: `linear-gradient(to top,${theme1},${theme2},${theme3})`}} onClick={(e)=>Fire(e,5)}>
           <div className="">
             <div className={`p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700`} style={{backgroundColor: headbg}} onClick={(e)=>Fire(e,1)}>
               <Header name={name} buttonbg={back} buttontext={text} InnerFire={InnerFire}/>
@@ -191,7 +227,12 @@ const Preference = (props) => {
           <div  onClick={(e)=>Fire(e,2)}>
             <Footer foot={footbg} iconColor={iconColor} Fire={Fire} InnerFire={InnerFire}/>
           </div>
-          <button onClick={ApplyChanges}>Apply Changes</button>
+          <div className="flex justify-center text-teal-600">
+            <button 
+              onClick={(e)=>ApplyChanges(e)}
+              className="mt-8 rounded bg-indigo-600 px-12 py-3 text-sm text-white transition hover:bg-indigo-700"
+            >Apply Changes</button>
+          </div>
         </div>}
     </>
   );
