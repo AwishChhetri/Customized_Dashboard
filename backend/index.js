@@ -71,9 +71,10 @@ const userSchema=mongoose.Schema({
         default:"white",
     },
     isAdmin:{
-        type:Boolean,
+        type:String,
         default:false,
-    }
+   
+
 },
 
 {
@@ -167,6 +168,35 @@ app.post('/colors', async (req, res) => {
     try {
         const update = await User.updateMany(
             { _id: req.body.userId },
+            { $set: { 
+                    buttonBackgroundColor: req.body.buttonbackgroundColor,
+                    textColor: req.body.textColor, 
+                    headerBackgroundColor:req.body.headerBackgroundColor,
+                    footerBackgroundColor:req.body.footerBackgroundColor,
+                    radioButtonColor:req.body.radioButtonColor,
+                    dropDownButtonColor:req.body.dropDownButtonColor,
+                    themeColor1:req.body.themeColor1,
+                    themeColor2:req.body.themeColor2,
+                    themeColor3:req.body.themeColor3,
+                    iconColor:req.body.iconColor,
+                } 
+            }
+        );
+        
+        console.log('updated');
+        res.status(200).json({ msg: 'Update successful' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ msg: 'Internal server error' });
+    }
+});
+
+
+
+app.post('/changeAll', async (req, res) => {
+    try {
+        const update = await User.updateMany(
+            {},
             { $set: { 
                     buttonBackgroundColor: req.body.buttonbackgroundColor,
                     textColor: req.body.textColor, 
