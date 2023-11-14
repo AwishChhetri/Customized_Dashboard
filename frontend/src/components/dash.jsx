@@ -25,6 +25,9 @@ const HeroPage = () => {
   const [theme2,setTheme2] = useState('')
   const [theme3,setTheme3] = useState('')
   const [iconColor,setIconColor] = useState('')
+  const [headerLabel,setHeaderLabel] = useState('')
+  const [label,setLabel] = useState('')
+  const [paraText,setParaText] = useState('')
 
   useEffect(()=>{
     axios.get(`http://localhost:5000/user/${id}`)
@@ -33,8 +36,9 @@ const HeroPage = () => {
       changeUI(
         res.data.textColor,res.data.buttonBackgroundColor,
         res.data.headerBackgroundColor,res.data.footerBackgroundColor,
-        res.data.dropDownButtonColor,res.data.radioButtonColor,
-        res.data.themeColor1,res.data.themeColor2,res.data.themeColor3,res.data.iconColor
+        res.data.dropDownButtonColor,res.data.radioButtonColor,res.data.themeColor1,
+        res.data.themeColor2,res.data.themeColor3,res.data.iconColor,
+        res.data.headerLabel,res.data.label,res.data.text
         )
       setLoading(false)
     })
@@ -42,17 +46,10 @@ const HeroPage = () => {
       console.log(err)
     })
 
-    const changeUI = (textcolor,backcolor,header,footer,drop,radio,theme1,theme2,theme3,iconColor)=>{
-      setButtonbg(backcolor)
-      setButtontext(textcolor)
-      setHeader(header)
-      setFooter(footer)
-      setDropdown(drop)
-      setRadio(radio)
-      setTheme1(`${theme1}`)
-      setTheme2(`${theme2}`)
-      setTheme3(`${theme3}`)
-      setIconColor(iconColor)
+    const changeUI = (textcolor,backcolor,header,footer,drop,radio,theme1,theme2,theme3,iconColor,headerLabel,label,paraText)=>{
+      setButtonbg(backcolor),setButtontext(textcolor),setHeader(header),setFooter(footer)
+      setDropdown(drop),setRadio(radio),setTheme1(`${theme1}`),setTheme2(`${theme2}`),setTheme3(`${theme3}`)
+      setIconColor(iconColor),setHeaderLabel(headerLabel),setLabel(label),setParaText(paraText)
     }
   },[])
 
@@ -63,9 +60,9 @@ const HeroPage = () => {
       {!loading && <div>
         <div className={`p-4 sm:ml-64 font-one`} style={{background: `linear-gradient(to top,${theme1},${theme2},${theme3})`}}>
           <div className={`p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700`} style={{backgroundColor: header}}>
-            <Header name={name} buttonbg={buttonbg} buttontext={buttontext}/>
+            <Header name={name} buttonbg={buttonbg} buttontext={buttontext} headerLabel={headerLabel}/>
           </div>
-          <Hero/>
+          <Hero label={label} paraText={paraText}/>
           <div className="grid grid-cols-2 gap-4 mb-4 ">
               <div className="flex items-center flex-col justify-center rounded  h-28  ">
                 <p className="lg:text-2xl">Gender</p>

@@ -25,6 +25,9 @@ const Preference = (props) => {
   const [theme2, setTheme2] = useState("");
   const [theme3, setTheme3] = useState("");
   const [iconColor,setIconColor] = useState("")
+  const [paraText,setParaText] = useState("")
+  const [label,setLabel] = useState("")
+  const [headerLabel,setHeaderLabel] = useState("")
   const [loading,setLoading] = useState(true)
   const [isAdmin,setIsAdmin] = useState(false)
 
@@ -51,6 +54,9 @@ const Preference = (props) => {
         setTheme3(res.data.themeColor3)
         setIconColor(res.data.iconColor)
         setIsAdmin(res.data.isAdmin)
+        setLabel(res.data.label)
+        setHeaderLabel(res.data.headerLabel)
+        setText(res.data.text)
         setLoading(false)
     })
     .catch((err)=>{
@@ -79,10 +85,12 @@ const Preference = (props) => {
         themeColor2: theme2,
         themeColor3: theme3,
         iconColor: iconColor,
+        headerLabel: headerLabel,
+        text: paraText,
+        label: label,
         userId: id,
       })
       .then((res) => {
-        console.log(res.data.msg);
         props.showDash();
       })
       .catch((err) => {
@@ -97,7 +105,53 @@ const Preference = (props) => {
       const { value: color } = await Swal.fire({
         title: "Header",
         html: `
-          <input id="swal-input1" type="color" value=${headbg}>
+          <p>Text</p>
+          <input id="swal-input1" type="color" value=${headerLabel}>
+          <p>Background</p>
+          <input id="swal-input2" type="color" value=${headbg}>
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          return [
+            document.getElementById("swal-input1").value,
+            document.getElementById("swal-input2").value
+          ]
+        }
+      })
+      if(color[0])
+        setHeaderLabel(color[0])
+      if(color[1])
+        setHeadbg(color[1])
+    }
+    if(val==='para')
+    {
+      const { value: color } = await Swal.fire({
+        title: "Header",
+        html: `
+          <p>Label</p>
+          <input id="swal-input1" type="color" value=${label}>
+          <p>Text</p>
+          <input id="swal-input2" type="color" value=${paraText}>
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          return [
+            document.getElementById("swal-input1").value,
+            document.getElementById("swal-input2").value
+          ]
+        }
+      })
+      if(color[0])
+        setLabel(color[0])
+      if(color[1])
+        setParaText(color[1])
+    }
+    if(val==='dropdown')
+    {
+      const { value: color } = await Swal.fire({
+        title: "DropDown",
+        html: `
+          <input id="swal-input1" type="color" value=${drop}>
         `,
         focusConfirm: false,
         preConfirm: () => {
@@ -107,7 +161,7 @@ const Preference = (props) => {
         }
       })
       if(color)
-        setHeadbg(color)
+        setDrop(color)
     }
     if(val===2)
     {
@@ -208,10 +262,10 @@ const Preference = (props) => {
       {!loading && <div className={`p-4 sm:ml-64 font-one`} style={{background: `linear-gradient(to top,${theme1},${theme2},${theme3})`}} onClick={(e)=>Fire(e,5)}>
           <div className="">
             <div className={`p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700`} style={{backgroundColor: headbg}} onClick={(e)=>Fire(e,1)}>
-              <Header name={name} buttonbg={back} buttontext={text} InnerFire={InnerFire}/>
+              <Header name={name} buttonbg={back} buttontext={text} InnerFire={InnerFire} headerLabel={headerLabel}/>
             </div>
           </div>
-          <Hero/>
+          <Hero Fire={Fire} label={label} paraText={paraText}/>
           <div className="grid grid-cols-2 gap-4 mb-4 ">
               <div className="flex items-center flex-col justify-center rounded  h-28  ">
                 <p className="lg:text-2xl">Gender</p>
@@ -221,7 +275,7 @@ const Preference = (props) => {
               </div>
               <div className="flex flex-col items-center justify-center rounded  h-28 ">
                 <p className="lg:text-2xl">Country</p>
-                <p className="lg:text-sm font-two text-black  flex flex-col ">
+                <p className="lg:text-sm font-two text-black  flex flex-col "  onClick={(e)=>Fire(e,'dropdown')}>
                   <DropDown
                     name="Choose your country"
                     option1="India"

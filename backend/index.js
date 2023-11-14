@@ -70,10 +70,22 @@ const userSchema=mongoose.Schema({
         type:String,
         default:"white",
     },
+    headerLabel:{
+        type: String,
+        default: "white",
+    },
+    label:{
+        type: String,
+        default: "white",
+    },
+    text:{
+        type: String,
+        default: "white",
+    },
     isAdmin:{
-        type:String,
+        type: Boolean,
         default:false,
-   
+    }
 
 },
 
@@ -149,6 +161,9 @@ app.post('/changeAll', async (req, res) => {
                     themeColor2:req.body.themeColor2,
                     themeColor3:req.body.themeColor3,
                     iconColor:req.body.iconColor,
+                    headerLabel:req.body.headerLabel,
+                    label:req.body.label,
+                    text:req.body.text
                 } 
             }
         );
@@ -179,6 +194,9 @@ app.post('/colors', async (req, res) => {
                     themeColor2:req.body.themeColor2,
                     themeColor3:req.body.themeColor3,
                     iconColor:req.body.iconColor,
+                    headerLabel:req.body.headerLabel,
+                    label:req.body.label,
+                    text:req.body.text
                 } 
             }
         );
