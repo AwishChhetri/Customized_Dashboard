@@ -70,8 +70,10 @@ const userSchema=mongoose.Schema({
         type:String,
         default:"white",
     },
-   
-
+    isAdmin:{
+        type:Boolean,
+        default:false,
+    }
 },
 
 {
@@ -128,8 +130,38 @@ app.post("/login",async(req,res)=>{
         }
 
     } })
-  
 
+
+// for changing dash of all the users
+app.post('/changeAll', async (req, res) => {
+    try {
+        const update = await User.updateMany(
+            {},
+            { $set: { 
+                    buttonBackgroundColor: req.body.buttonbackgroundColor,
+                    textColor: req.body.textColor, 
+                    headerBackgroundColor:req.body.headerBackgroundColor,
+                    footerBackgroundColor:req.body.footerBackgroundColor,
+                    radioButtonColor:req.body.radioButtonColor,
+                    dropDownButtonColor:req.body.dropDownButtonColor,
+                    themeColor1:req.body.themeColor1,
+                    themeColor2:req.body.themeColor2,
+                    themeColor3:req.body.themeColor3,
+                    iconColor:req.body.iconColor,
+                } 
+            }
+        );
+        
+        console.log('updated');
+        res.status(200).json({ msg: 'Update successful' });
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ msg: 'Internal server error' });
+    }
+});
+
+
+// for individual update on the dash
 app.post('/colors', async (req, res) => {
     console.log("body color = ",req.body.backgroundColor)
     try {

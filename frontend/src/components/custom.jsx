@@ -26,6 +26,7 @@ const Preference = (props) => {
   const [theme3, setTheme3] = useState("");
   const [iconColor,setIconColor] = useState("")
   const [loading,setLoading] = useState(true)
+  const [isAdmin,setIsAdmin] = useState(false)
 
   const startAlert = ()=>{
     Swal.fire({
@@ -49,6 +50,7 @@ const Preference = (props) => {
         setTheme2(res.data.themeColor2)
         setTheme3(res.data.themeColor3)
         setIconColor(res.data.iconColor)
+        setIsAdmin(res.data.isAdmin)
         setLoading(false)
     })
     .catch((err)=>{
@@ -59,8 +61,14 @@ const Preference = (props) => {
 
   const ApplyChanges = (e) => {
     e.stopPropagation()
+    var scope = 'colors'
+    if(isAdmin)
+    {
+      scope = 'changeAll'
+    }
+
     axios
-      .post("http://localhost:5000/colors", {
+      .post(`http://localhost:5000/${scope}`, {
         textColor: text,
         buttonbackgroundColor: back,
         headerBackgroundColor: headbg,
