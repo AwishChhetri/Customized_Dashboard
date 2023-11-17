@@ -68,22 +68,26 @@ const userSchema=mongoose.Schema({
     },
     iconColor:{
         type:String,
-        default:"white",
+        default:"black",
     },
     headerLabel:{
         type: String,
-        default: "white",
+        default: "white"
     },
     label:{
         type: String,
-        default: "white",
+        default: "white"
     },
-    text:{
+    paraText:{
         type: String,
-        default: "white",
+        default: "white"
+    },
+    pref:{
+        type: Boolean,
+        default: false
     },
     isAdmin:{
-        type: Boolean,
+        type:Boolean,
         default:false,
     }
 
@@ -93,8 +97,107 @@ const userSchema=mongoose.Schema({
     timestamps:true
 });
 
+
+const colorSchema=mongoose.Schema({
+   
+    buttonBackgroundColor:{
+        type:String,
+        default: "Blue"
+    },
+    textColor:{
+        type:String,
+        default: "Black"
+    },
+    headerBackgroundColor:{
+        type:String,
+        default:"white"
+    },
+    footerBackgroundColor:{
+        type:String,
+        default:"white"
+    },
+    radioButtonColor:
+    {
+        type:String,
+        default:"white"
+    },
+    dropDownButtonColor:{
+        type:String,
+        default:"white"
+    },
+    themeColor1:{
+        type:String,
+        default:"blue",
+    },
+    themeColor2:{
+        type:String,
+        default:"red",
+    },
+    themeColor3:{
+        type:String,
+        default:"white",
+    },
+    iconColor:{
+        type:String,
+        default:"black",
+    },
+    headerLabel:{
+        type: String,
+        default: "white"
+    },
+    label:{
+        type: String,
+        default: "white"
+    },
+    paraText:{
+        type: String,
+        default: "white"
+    },
+    isAdmin:{
+        type:Boolean,
+        default:false,
+    }
+},
+
+{
+    timestamps:true
+});
+
 const User=new mongoose.model('User', userSchema);
- 
+const Color=new mongoose.model('Color', colorSchema);
+
+app.post('/onlyColors',async(req,res)=>{
+    console.log("colors : ",req.body)
+    try {
+
+        const update = await Color.updateMany(
+            {_id: `6557387bbfffe99f7d180bbe`},
+            { $set: { 
+                    buttonBackgroundColor: req.body.buttonbackgroundColor,
+                    textColor: req.body.textColor, 
+                    headerBackgroundColor:req.body.headerBackgroundColor,
+                    footerBackgroundColor:req.body.footerBackgroundColor,
+                    radioButtonColor:req.body.radioButtonColor,
+                    dropDownButtonColor:req.body.dropDownButtonColor,
+                    themeColor1:req.body.themeColor1,
+                    themeColor2:req.body.themeColor2,
+                    themeColor3:req.body.themeColor3,
+                    iconColor:req.body.iconColor,
+                    headerLabel: req.body.headerLabel,
+                    label: req.body.label,
+                    paraText: req.body.paraText,
+                } 
+            }
+        );
+        
+        console.log("Updated for all users",update);
+        res.status(200).json({ msg: 'Update successful' });
+    }catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ msg: 'Internal server error' });
+    }
+
+})
 app.post('/register', async(req, res) => {
     console.log(req.body);
     const newEmail=await User.findOne({email:req.body.email});
@@ -121,6 +224,7 @@ app.post('/register', async(req, res) => {
     }
   });
 
+  
 
 app.post("/login",async(req,res)=>{
     console.log("This is the login:",req.body)
@@ -143,46 +247,12 @@ app.post("/login",async(req,res)=>{
         }
 
     } })
+  
 
-
-// for changing dash of all the users
-app.post('/changeAll', async (req, res) => {
-    try {
-        const update = await User.updateMany(
-            {},
-            { $set: { 
-                    buttonBackgroundColor: req.body.buttonbackgroundColor,
-                    textColor: req.body.textColor, 
-                    headerBackgroundColor:req.body.headerBackgroundColor,
-                    footerBackgroundColor:req.body.footerBackgroundColor,
-                    radioButtonColor:req.body.radioButtonColor,
-                    dropDownButtonColor:req.body.dropDownButtonColor,
-                    themeColor1:req.body.themeColor1,
-                    themeColor2:req.body.themeColor2,
-                    themeColor3:req.body.themeColor3,
-                    iconColor:req.body.iconColor,
-                    headerLabel:req.body.headerLabel,
-                    label:req.body.label,
-                    text:req.body.text
-                } 
-            }
-        );
-        
-        console.log('updated');
-        res.status(200).json({ msg: 'Update successful' });
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ msg: 'Internal server error' });
-    }
-});
-
-
-// for individual update on the dash
 app.post('/colors', async (req, res) => {
-    console.log("body color = ",req.body.backgroundColor)
     try {
         const update = await User.updateMany(
-            { _id: req.body.userId },
+            {_id: req.body.userId},
             { $set: { 
                     buttonBackgroundColor: req.body.buttonbackgroundColor,
                     textColor: req.body.textColor, 
@@ -194,21 +264,20 @@ app.post('/colors', async (req, res) => {
                     themeColor2:req.body.themeColor2,
                     themeColor3:req.body.themeColor3,
                     iconColor:req.body.iconColor,
-                    headerLabel:req.body.headerLabel,
-                    label:req.body.label,
-                    text:req.body.text
+                    headerLabel: req.body.headerLabel,
+                    label: req.body.label,
+                    paraText: req.body.paraText,
+                    pref: req.body.pref
                 } 
             }
         );
-        
-        console.log('updated');
+        console.log('updated colors for single user - ',update);
         res.status(200).json({ msg: 'Update successful' });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ msg: 'Internal server error' });
     }
 });
-
 
 
 app.post('/changeAll', async (req, res) => {
@@ -226,6 +295,9 @@ app.post('/changeAll', async (req, res) => {
                     themeColor2:req.body.themeColor2,
                     themeColor3:req.body.themeColor3,
                     iconColor:req.body.iconColor,
+                    headerLabel: req.body.headerLabel,
+                    label: req.body.label,
+                    paraText: req.body.paraText,
                 } 
             }
         );
@@ -243,8 +315,30 @@ app.get('/user/:id',async(req,res)=>{
     const userId = req.params.id
     const result=await User.findOne({_id:userId});
     res.json(result).status(200)
-    console.log(result)
+    console.log("User data - ",result)
 });
+
+app.get('/onlyColors',async(req,res)=>{
+    const userId = `6557387bbfffe99f7d180bbe`
+    const result=await Color.findOne({_id:userId});
+    res.json(result).status(200)
+    console.log("From only colors : ",result)
+});
+
+app.post('/changePref',async(req,res)=>{
+    try{
+        const update = await User.updateMany(
+            {},
+            { $set: { 
+                    pref: false
+                } 
+            }
+        );
+    }
+    catch(err){
+        console.log("Not able to change Preference")
+    }
+})
 
 
 
@@ -260,5 +354,3 @@ const server=app.listen(port,()=>{
 
 
 module.exports = { app, server, User};
-
-

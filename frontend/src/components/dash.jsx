@@ -33,25 +33,57 @@ const HeroPage = () => {
     axios.get(`http://localhost:5000/user/${id}`)
     .then((res)=>{
       setName(res.data.username)
-      changeUI(
-        res.data.textColor,res.data.buttonBackgroundColor,
-        res.data.headerBackgroundColor,res.data.footerBackgroundColor,
-        res.data.dropDownButtonColor,res.data.radioButtonColor,res.data.themeColor1,
-        res.data.themeColor2,res.data.themeColor3,res.data.iconColor,
-        res.data.headerLabel,res.data.label,res.data.text
-        )
-      setLoading(false)
+      setColors(res.data.pref);
     })
     .catch((err)=>{
       console.log(err)
     })
-
-    const changeUI = (textcolor,backcolor,header,footer,drop,radio,theme1,theme2,theme3,iconColor,headerLabel,label,paraText)=>{
-      setButtonbg(backcolor),setButtontext(textcolor),setHeader(header),setFooter(footer)
-      setDropdown(drop),setRadio(radio),setTheme1(`${theme1}`),setTheme2(`${theme2}`),setTheme3(`${theme3}`)
-      setIconColor(iconColor),setHeaderLabel(headerLabel),setLabel(label),setParaText(paraText)
-    }
   },[])
+
+  const setColors = (val)=>{
+    if(val)
+    {
+      console.log("Colors of user")
+      axios.get(`http://localhost:5000/user/${id}`)
+      .then((res)=>{
+        changeUI(
+          res.data.textColor,res.data.buttonBackgroundColor,
+          res.data.headerBackgroundColor,res.data.footerBackgroundColor,
+          res.data.dropDownButtonColor,res.data.radioButtonColor,res.data.themeColor1,
+          res.data.themeColor2,res.data.themeColor3,res.data.iconColor,
+          res.data.headerLabel,res.data.label,res.data.paraText
+          )
+          setLoading(false)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+    else
+    {
+      console.log("Colors of ADMIN")
+      axios.get(`http://localhost:5000/onlyColors`)
+      .then((res)=>{
+        changeUI(
+          res.data.textColor,res.data.buttonBackgroundColor,
+          res.data.headerBackgroundColor,res.data.footerBackgroundColor,
+          res.data.dropDownButtonColor,res.data.radioButtonColor,res.data.themeColor1,
+          res.data.themeColor2,res.data.themeColor3,res.data.iconColor,
+          res.data.headerLabel,res.data.label,res.data.paraText
+          )
+          setLoading(false)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+  }
+
+  const changeUI = (textcolor,backcolor,header,footer,drop,radio,theme1,theme2,theme3,iconColor,headerLabel,label,paraText)=>{
+    setButtonbg(backcolor),setButtontext(textcolor),setHeader(header),setFooter(footer)
+    setDropdown(drop),setRadio(radio),setTheme1(`${theme1}`),setTheme2(`${theme2}`),setTheme3(`${theme3}`)
+    setIconColor(iconColor),setHeaderLabel(headerLabel),setLabel(label),setParaText(paraText)
+  }
 
 
   return (

@@ -42,22 +42,9 @@ const Preference = (props) => {
   useEffect(()=>{
     axios.get(`http://localhost:5000/user/${id}`)
     .then((res)=>{
-        setName(res.data.username)
-        setText(res.data.textColor)
-        setBack(res.data.buttonBackgroundColor)
-        setHeadbg(res.data.headerBackgroundColor)
-        setFootbg(res.data.footerBackgroundColor)
-        setDrop(res.data.dropDownButtonColor)
-        setRadio(res.data.radioButtonColor)
-        setTheme1(res.data.themeColor1)
-        setTheme2(res.data.themeColor2)
-        setTheme3(res.data.themeColor3)
-        setIconColor(res.data.iconColor)
-        setIsAdmin(res.data.isAdmin)
-        setLabel(res.data.label)
-        setHeaderLabel(res.data.headerLabel)
-        setText(res.data.text)
-        setLoading(false)
+      setName(res.data.username)
+      setIsAdmin(res.data.isAdmin)
+      setColors(res.data.pref);
     })
     .catch((err)=>{
       console.log(err)
@@ -65,14 +52,70 @@ const Preference = (props) => {
     startAlert()
   },[])
 
+  const setColors = (val)=>{
+    if(val)
+    {
+      console.log("Colors of user")
+      axios.get(`http://localhost:5000/user/${id}`)
+      .then((res)=>{
+          setText(res.data.textColor)
+          setBack(res.data.buttonBackgroundColor)
+          setHeadbg(res.data.headerBackgroundColor)
+          setFootbg(res.data.footerBackgroundColor)
+          setDrop(res.data.dropDownButtonColor)
+          setRadio(res.data.radioButtonColor)
+          setTheme1(res.data.themeColor1)
+          setTheme2(res.data.themeColor2)
+          setTheme3(res.data.themeColor3)
+          setIconColor(res.data.iconColor)
+          setLabel(res.data.label)
+          setHeaderLabel(res.data.headerLabel)
+          setParaText(res.data.paraText)
+          setLoading(false)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+    else
+    {
+      console.log("Colors of ADMIN")
+      axios.get(`http://localhost:5000/onlyColors`)
+      .then((res)=>{
+          setText(res.data.textColor)
+          setBack(res.data.buttonBackgroundColor)
+          setHeadbg(res.data.headerBackgroundColor)
+          setFootbg(res.data.footerBackgroundColor)
+          setDrop(res.data.dropDownButtonColor)
+          setRadio(res.data.radioButtonColor)
+          setTheme1(res.data.themeColor1)
+          setTheme2(res.data.themeColor2)
+          setTheme3(res.data.themeColor3)
+          setIconColor(res.data.iconColor)
+          setLabel(res.data.label)
+          setHeaderLabel(res.data.headerLabel)
+          setParaText(res.data.paraText)
+          setLoading(false)
+      })
+      .catch((err)=>{
+        console.log(err)
+      })
+    }
+  }
+
+
+  const pref = true
+
   const ApplyChanges = (e) => {
     e.stopPropagation()
     var scope = 'colors'
     if(isAdmin)
-    {
-      scope = 'changeAll'
+    { 
+      axios.post(`http://localhost:5000/changePref`)
+      console.log("Changed by ADMIN")
+      scope = 'onlyColors'
     }
-
+    console.log("ADMIN?",isAdmin)
     axios
       .post(`http://localhost:5000/${scope}`, {
         textColor: text,
@@ -86,9 +129,10 @@ const Preference = (props) => {
         themeColor3: theme3,
         iconColor: iconColor,
         headerLabel: headerLabel,
-        text: paraText,
+        paraText: paraText,
         label: label,
         userId: id,
+        pref: pref
       })
       .then((res) => {
         props.showDash();
