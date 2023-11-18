@@ -209,15 +209,15 @@ app.post('/register', async(req, res) => {
             password: req.body.password
           });
         
-          newUser.save()
-            .then(() => {
+         const result= newUser.save()
+            if(result){
               console.log('User saved successfully');
               res.status(200).json({ msg: "Success" });
-            })
-            .catch((err) => {
+            }
+            else {
               console.log('Error saving user:', err);
               res.status(500).json({ msg: "Error" });
-            });
+            }
 
     }else{
         res.status(300).json({ msg: "Email Already Exist!" });
