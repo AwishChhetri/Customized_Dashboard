@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Radiobutton from "./Radiobutton"
 import DropDown from "./dropdown"
-import Footer from '../components/footer.jsx'
-import Hero from '../components/hero'
-import Header from "./header.jsx";
+import Custom_Footer from '../components/custom_footer.jsx'
+import Custom_Hero from './custom_hero.jsx'
+import Custom_Header from "./custom_header.jsx";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Loading from "./loading";
@@ -13,125 +13,108 @@ import '../css/custom.css'
 const Preference = (props) => {
   const { id } = useParams();
 
-  const [name,setName] = useState('')
-  
-  const [text, setText] = useState("");
-  const [back, setBack] = useState("");
-  const [headbg, setHeadbg] = useState("");
-  const [footbg, setFootbg] = useState("");
-  const [radio, setRadio] = useState("");
-  const [drop, setDrop] = useState("");
-  const [theme1, setTheme1] = useState("");
-  const [theme2, setTheme2] = useState("");
-  const [theme3, setTheme3] = useState("");
-  const [iconColor,setIconColor] = useState("")
-  const [paraText,setParaText] = useState("")
-  const [label,setLabel] = useState("")
-  const [headerLabel,setHeaderLabel] = useState("")
-  const [loading,setLoading] = useState(true)
-  const [isAdmin,setIsAdmin] = useState(false)
+  const [userPreferences, setUserPreferences] = useState({
+    name: "",
+    text: "",
+    back: "",
+    headbg: "",
+    footbg: "",
+    radio: "",
+    drop: "",
+    theme1: "",
+    theme2: "",
+    theme3: "",
+    iconColor: "",
+    paraText: "",
+    label: "",
+    headerLabel: "",
+  });
 
-  const startAlert = ()=>{
+  const [loading, setLoading] = useState(true);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  const startAlert = () => {
     Swal.fire({
-      position: 'center',
+      position: "center",
       title: `Click on the element to edit.`,
       text: `NOTE : The changes will only reflect after hitting the 'Apply Changes' button.`,
-    })
+    });
+  };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/user/${id}`)
+      .then((res) => {
+        setUserPreferences((prevPreferences) => ({
+          ...prevPreferences,
+          name: res.data.username,
+        }));
+        setIsAdmin(res.data.isAdmin)
+        setColors(res.data.pref);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    startAlert();
+  }, []);
+
+  const setColors = (val) => {
+    const endpoint = val ? `http://localhost:5000/user/${id}` : `http://localhost:5000/onlyColors`;
+    axios
+      .get(endpoint)
+      .then((res) => {
+        setUserPreferences((prevPreferences) => ({
+          ...prevPreferences,
+          text: res.data.textColor,
+          back: res.data.buttonBackgroundColor,
+          headbg: res.data.headerBackgroundColor,
+          footbg: res.data.footerBackgroundColor,
+          drop: res.data.dropDownButtonColor,
+          radio: res.data.radioButtonColor,
+          theme1: res.data.themeColor1,
+          theme2: res.data.themeColor2,
+          theme3: res.data.themeColor3,
+          iconColor: res.data.iconColor,
+          label: res.data.label,
+          headerLabel: res.data.headerLabel,
+          paraText: res.data.paraText,
+        }))
+        setLoading(false)
+      })
+      .catch((err) => {
+        console.log(err);
+      })
   }
 
-  useEffect(()=>{
-    axios.get(`http://localhost:5000/user/${id}`)
-    .then((res)=>{
-      setName(res.data.username)
-      setIsAdmin(res.data.isAdmin)
-      setColors(res.data.pref);
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-    startAlert()
-  },[])
-
-  const setColors = (val)=>{
-    if(val)
-    {
-      axios.get(`http://localhost:5000/user/${id}`)
-      .then((res)=>{
-          setText(res.data.textColor)
-          setBack(res.data.buttonBackgroundColor)
-          setHeadbg(res.data.headerBackgroundColor)
-          setFootbg(res.data.footerBackgroundColor)
-          setDrop(res.data.dropDownButtonColor)
-          setRadio(res.data.radioButtonColor)
-          setTheme1(res.data.themeColor1)
-          setTheme2(res.data.themeColor2)
-          setTheme3(res.data.themeColor3)
-          setIconColor(res.data.iconColor)
-          setLabel(res.data.label)
-          setHeaderLabel(res.data.headerLabel)
-          setParaText(res.data.paraText)
-          setLoading(false)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-    }
-    else
-    {
-      axios.get(`http://localhost:5000/onlyColors`)
-      .then((res)=>{
-          setText(res.data.textColor)
-          setBack(res.data.buttonBackgroundColor)
-          setHeadbg(res.data.headerBackgroundColor)
-          setFootbg(res.data.footerBackgroundColor)
-          setDrop(res.data.dropDownButtonColor)
-          setRadio(res.data.radioButtonColor)
-          setTheme1(res.data.themeColor1)
-          setTheme2(res.data.themeColor2)
-          setTheme3(res.data.themeColor3)
-          setIconColor(res.data.iconColor)
-          setLabel(res.data.label)
-          setHeaderLabel(res.data.headerLabel)
-          setParaText(res.data.paraText)
-          setLoading(false)
-      })
-      .catch((err)=>{
-        console.log(err)
-      })
-    }
-  }
-
-
-  const pref = true
+  const pref =true
 
   const ApplyChanges = (e) => {
     e.stopPropagation()
-    var scope = 'colors'
+    let scope = 'colors'
     if(isAdmin)
     { 
       axios.post(`http://localhost:5000/changePref`)
-      console.log("Changed by ADMIN")
       scope = 'onlyColors'
     }
     axios
       .post(`http://localhost:5000/${scope}`, {
-        textColor: text,
-        buttonbackgroundColor: back,
-        headerBackgroundColor: headbg,
-        footerBackgroundColor: footbg,
-        radioButtonColor: radio,
-        dropDownButtonColor: drop,
-        themeColor1: theme1,
-        themeColor2: theme2,
-        themeColor3: theme3,
-        iconColor: iconColor,
-        headerLabel: headerLabel,
-        paraText: paraText,
-        label: label,
+        textColor: userPreferences.text,
+        buttonbackgroundColor: userPreferences.back,
+        headerBackgroundColor: userPreferences.headbg,
+        footerBackgroundColor: userPreferences.footbg,  
+        radioButtonColor: userPreferences.radio,
+        dropDownButtonColor: userPreferences.drop,
+        themeColor1: userPreferences.theme1,
+        themeColor2: userPreferences.theme2,
+        themeColor3: userPreferences.theme3,
+        iconColor: userPreferences.iconColor,
+        headerLabel: userPreferences.headerLabel,
+        paraText: userPreferences.paraText,
+        label: userPreferences.label,
         userId: id,
         pref: pref
       })
-      .then((res) => {
+      .then(() => {
         props.showDash();
       })
       .catch((err) => {
@@ -139,198 +122,76 @@ const Preference = (props) => {
       });
   }
 
-  const Fire = async(e,val)=>{
-    e.stopPropagation()
-    if(val===1)
-    {
-      const { value: color } = await Swal.fire({
-        title: "Header",
-        html: `
-          <p>Text</p>
-          <input id="swal-input1" type="color" value=${headerLabel}>
-          <p>Background</p>
-          <input id="swal-input2" type="color" value=${headbg}>
-        `,
-        focusConfirm: false,
-        preConfirm: () => {
-          return [
-            document.getElementById("swal-input1").value,
-            document.getElementById("swal-input2").value
-          ]
-        }
-      })
-      if(color[0])
-        setHeaderLabel(color[0])
-      if(color[1])
-        setHeadbg(color[1])
+  const setPreferences = (property, value) => {
+    setUserPreferences((prevPreferences) => ({ ...prevPreferences, [property]: value }));
+  };
+  
+  const getColorInput = async (title, labels, properties) => {
+    const { value: color } = await Swal.fire({
+      title: title,
+      html: labels.map((label, index) => `<p>${label}</p><input id="swal-input${index + 1}" type="color" value=${userPreferences[properties[index]]}>`).join(''),
+      focusConfirm: false,
+      preConfirm: () => labels.map((_, index) => document.getElementById(`swal-input${index + 1}`).value),
+    });
+  
+    color.forEach((c, index) => {
+      if (c) setPreferences(properties[index], c);
+    });
+  };
+  
+  const Fire = async (e, val) => {
+    e.stopPropagation();
+  
+    if (val === 'header') {
+      await getColorInput("Header", ["Text", "Background"], ["headerLabel", "headbg"]);
     }
-    if(val==='para')
-    {
-      const { value: color } = await Swal.fire({
-        title: "Header",
-        html: `
-          <p>Label</p>
-          <input id="swal-input1" type="color" value=${label}>
-          <p>Text</p>
-          <input id="swal-input2" type="color" value=${paraText}>
-        `,
-        focusConfirm: false,
-        preConfirm: () => {
-          return [
-            document.getElementById("swal-input1").value,
-            document.getElementById("swal-input2").value
-          ]
-        }
-      })
-      if(color[0])
-        setLabel(color[0])
-      if(color[1])
-        setParaText(color[1])
+  
+    if (val === 'para') {
+      await getColorInput("Header", ["Label", "Text"], ["label", "paraText"]);
     }
-    if(val==='dropdown')
-    {
-      const { value: color } = await Swal.fire({
-        title: "DropDown",
-        html: `
-          <input id="swal-input1" type="color" value=${drop}>
-        `,
-        focusConfirm: false,
-        preConfirm: () => {
-          return (
-            document.getElementById("swal-input1").value
-          )
-        }
-      })
-      if(color)
-        setDrop(color)
+  
+    if (val === 'theme') {
+      await getColorInput("Theme", ["Top Color", "Center Color", "Bottom Color"], ["theme1", "theme2", "theme3"]);
     }
-    if(val==='radio')
-    {
-      const { value: color } = await Swal.fire({
-        title: "Radio",
-        html: `
-          <input id="swal-input1" type="color" value=${radio}>
-        `,
-        focusConfirm: false,
-        preConfirm: () => {
-          return (
-            document.getElementById("swal-input1").value
-          )
-        }
-      })
-      if(color){
-        setRadio(color)
-      }
-    }
-    if(val===2)
-    {
-      const { value: color } = await Swal.fire({
-        title: "Footer",
-        html: `
-          <input id="swal-input1" type="color" value=${footbg}>
-        `,
-        focusConfirm: false,
-        preConfirm: () => {
-          return (
-            document.getElementById("swal-input1").value
-          )
-        }
-      })
-      if(color){
-        setFootbg(color)
-      }
-    }
-    if(val===5)
-    {
-      const { value: color } = await Swal.fire({
-        title: "Theme",
-        html: `
-          <p>Top Color</p>
-          <input id="swal-input1" type="color" value=${theme1}>
-          <p>Center Color</p>
-          <input id="swal-input2" type="color" value=${theme2}>
-          <p>Bottom Color</p>
-          <input id="swal-input3" type="color" value=${theme3}>
-        `,
-        focusConfirm: false,
-        preConfirm: () => {
-          return [
-            document.getElementById("swal-input1").value,
-            document.getElementById("swal-input2").value,
-            document.getElementById("swal-input3").value
-          ]
-        }
-      })
-      if(color[0])setTheme3(color[0])
-      if(color[1])setTheme2(color[1])
-      if(color[2])setTheme1(color[2])
-    }
-  }
 
-  const InnerFire = async(e,val)=>{
-    e.stopPropagation()
-    if(val===3)
-    {
-      const { value: color } = await Swal.fire({
-        title: "Button",
-        html: `
-          <p>Text</p>
-          <input id="swal-input1" type="color" value=${text}>
-          <p>Background</p>
-          <input id="swal-input2" type="color" value=${back}>
-        `,
-        focusConfirm: false,
-        preConfirm: () => {
-          return [
-            document.getElementById("swal-input1").value,
-            document.getElementById("swal-input2").value
-          ]
-        }
-      })
-      if(color[0]){
-        setText(color[0])
-      }
-      if(color[1]){
-        setBack(color[1])
-      }
+    if (val === 'icons') {
+      await getColorInput("Icons", ["Icon Color"], ["iconColor"]);
     }
-    if(val===4)
-    {
-      const { value: color } = await Swal.fire({
-        title: "Icons",
-        html: `
-          <input id="swal-input1" type="color" value=${iconColor}>
-        `,
-        focusConfirm: false,
-        preConfirm: () => {
-          return (
-            document.getElementById("swal-input1").value
-          )
-        }
-      })
-      if(color)
-      {
-        setIconColor(color)
-      }
+
+    if (val === 'button') {
+      await getColorInput("Button", ["Text", "Background"], ["text", "back"]);
     }
-  }
+
+    if (val === 'footer') {
+      await getColorInput("Footer", ["Footer Color"], ["footbg"]);
+    }
+
+    if (val === 'radio') {
+      await getColorInput("Radio", ["Radio Color"], ["radio"]);
+    }
+
+    if (val === 'dropdown') {
+      await getColorInput("Dropdown", ["Drop Down Color"], ["drop"]);
+    }
+
+  };
 
   return (
     <>
       {loading && <Loading/>}
-      {!loading && <div className={`p-4 sm:ml-64 font-one`} style={{background: `linear-gradient(to top,${theme1},${theme2},${theme3})`}} onClick={(e)=>Fire(e,5)}>
+      {!loading && <div className={`p-4 sm:ml-64 font-one`} style={{background: `linear-gradient(to top,${userPreferences.theme1},${userPreferences.theme2},${userPreferences.theme3})`}} onClick={(e)=>Fire(e,'theme')}>
           <div className="">
-            <div className={`p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700`} style={{backgroundColor: headbg}} onClick={(e)=>Fire(e,1)}>
-              <Header name={name} buttonbg={back} buttontext={text} InnerFire={InnerFire} headerLabel={headerLabel}/>
+            <div className={`p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700`} style={{backgroundColor: userPreferences.headbg}} onClick={(e)=>Fire(e,'header')}>
+              <Custom_Header name={userPreferences.name} buttonbg={userPreferences.back} buttontext={userPreferences.text} Fire={Fire} headerLabel={userPreferences.headerLabel}/>
             </div>
           </div>
-          <Hero Fire={Fire} label={label} paraText={paraText}/>
+          <Custom_Hero Fire={Fire} label={userPreferences.label} paraText={userPreferences.paraText}/>
           <div className="grid grid-cols-2 gap-4 mb-4 ">
               <div className="flex items-center flex-col justify-center rounded  h-28 ">
                 <div  onClick={(e)=>Fire(e,'radio')}>
                   <p className="lg:text-2xl flex items-center flex-col justify-center">Gender</p>
                   <p className=" flex font-two lg:flex-row lg:text-sm sm:text-xs flex-col sm:text-clip sm:overflow-auto  text-black ">
-                    <Radiobutton name="Red" radio={radio}/>
+                    <Radiobutton name="Red" radio={userPreferences.radio}/>
                   </p>
                 </div>
               </div>
@@ -342,13 +203,13 @@ const Preference = (props) => {
                     option1="India"
                     option2="Pakistan"
                     option3="Others"
-                    drop={drop}
+                    drop={userPreferences.drop}
                   />
                 </p>
               </div>
             </div>
-          <div  onClick={(e)=>Fire(e,2)}>
-            <Footer foot={footbg} iconColor={iconColor} Fire={Fire} InnerFire={InnerFire}/>
+          <div  onClick={(e)=>Fire(e,'footer')}>
+            <Custom_Footer footerColor={userPreferences.footbg} iconColor={userPreferences.iconColor} Fire={Fire}/>
           </div>
           <div className="flex justify-center text-teal-600">
             <button 
