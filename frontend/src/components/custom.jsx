@@ -55,7 +55,6 @@ const Preference = (props) => {
   const setColors = (val)=>{
     if(val)
     {
-      console.log("Colors of user")
       axios.get(`http://localhost:5000/user/${id}`)
       .then((res)=>{
           setText(res.data.textColor)
@@ -79,7 +78,6 @@ const Preference = (props) => {
     }
     else
     {
-      console.log("Colors of ADMIN")
       axios.get(`http://localhost:5000/onlyColors`)
       .then((res)=>{
           setText(res.data.textColor)
@@ -115,7 +113,6 @@ const Preference = (props) => {
       console.log("Changed by ADMIN")
       scope = 'onlyColors'
     }
-    console.log("ADMIN?",isAdmin)
     axios
       .post(`http://localhost:5000/${scope}`, {
         textColor: text,
@@ -206,6 +203,24 @@ const Preference = (props) => {
       })
       if(color)
         setDrop(color)
+    }
+    if(val==='radio')
+    {
+      const { value: color } = await Swal.fire({
+        title: "Radio",
+        html: `
+          <input id="swal-input1" type="color" value=${radio}>
+        `,
+        focusConfirm: false,
+        preConfirm: () => {
+          return (
+            document.getElementById("swal-input1").value
+          )
+        }
+      })
+      if(color){
+        setRadio(color)
+      }
     }
     if(val===2)
     {
@@ -311,11 +326,13 @@ const Preference = (props) => {
           </div>
           <Hero Fire={Fire} label={label} paraText={paraText}/>
           <div className="grid grid-cols-2 gap-4 mb-4 ">
-              <div className="flex items-center flex-col justify-center rounded  h-28  ">
-                <p className="lg:text-2xl">Gender</p>
-                <p className=" flex   font-two lg:flex-row lg:text-sm sm:text-xs flex-col sm:text-clip sm:overflow-auto  text-black ">
-                  <Radiobutton name="Red" radio={radio}/>
-                </p>
+              <div className="flex items-center flex-col justify-center rounded  h-28 ">
+                <div  onClick={(e)=>Fire(e,'radio')}>
+                  <p className="lg:text-2xl flex items-center flex-col justify-center">Gender</p>
+                  <p className=" flex font-two lg:flex-row lg:text-sm sm:text-xs flex-col sm:text-clip sm:overflow-auto  text-black ">
+                    <Radiobutton name="Red" radio={radio}/>
+                  </p>
+                </div>
               </div>
               <div className="flex flex-col items-center justify-center rounded  h-28 ">
                 <p className="lg:text-2xl">Country</p>

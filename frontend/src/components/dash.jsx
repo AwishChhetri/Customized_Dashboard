@@ -43,7 +43,6 @@ const HeroPage = () => {
   const setColors = (val)=>{
     if(val)
     {
-      console.log("Colors of user")
       axios.get(`http://localhost:5000/user/${id}`)
       .then((res)=>{
         changeUI(
@@ -61,7 +60,6 @@ const HeroPage = () => {
     }
     else
     {
-      console.log("Colors of ADMIN")
       axios.get(`http://localhost:5000/onlyColors`)
       .then((res)=>{
         changeUI(
