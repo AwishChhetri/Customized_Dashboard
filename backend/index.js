@@ -211,11 +211,11 @@ app.post('/register', async(req, res) => {
         
          const result= newUser.save()
             if(result){
-              console.log('User saved successfully');
+              console.log('User Saved Successfully');
               res.status(200).json({ msg: "Success" });
             }
             else {
-              console.log('Error saving user:', err);
+              console.log('Error Saving User:', err);
               res.status(500).json({ msg: "Error" });
             }
 
